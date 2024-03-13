@@ -1,0 +1,275 @@
+﻿@page "/weather"
+@attribute [StreamRendering]
+@rendermode InteractiveServer
+
+<PageTitle>Weather</PageTitle>
+
+<h1>Каталог товаров</h1>
+
+@*<p>This component demonstrates showing data.</p>*@
+
+
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Где заберете</th>
+        <th>Магазин</th>
+        <th>Товар</th>
+        <th>Кол-во в магазине шт.</th>
+        <th>Выбрать шт.</th>
+    </tr>
+        
+       
+    </thead>
+    <tbody>
+        
+    <tr>
+        <td><div class="form-check">
+              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+              <label class="form-check-label" for="exampleRadios1">
+                Заберу от сюда
+              </label>
+            </div>
+</td>
+        <td>Магазин №1 (Ул.Труда 4)</td>
+        <td><p><a class="link-opacity-50-hover" href="https://market.yandex.ru/product--kholodilniks-nizhnei-morozilnoi-kameroi-grundig-gqn20130lxbr-no-frost-stalnoi-antratsit/33091063?sku=102543826499&do-waremd5=xSNUKz4R0YNRdUbzk5M_mw&uniqueId=93014734">Холодильник</a></p></td>
+        <td>3</td>
+        <td>
+            <div class="d-flex">
+                <button class="btn btn-outline-primary" style="margin-right: 30px;" @onclick="IncrementCount1">-</button>
+
+                <div role="status"> @currentCount1</div>
+
+                <button class="btn btn-outline-primary" style="margin-left: 30px;" @onclick="IncrementCount2">+</button>
+            </div>
+
+            @code {
+                private int currentCount1 = 0;
+
+                private void IncrementCount1()
+                {
+                    currentCount1--;
+                }
+
+                private void IncrementCount2()
+                {
+                    currentCount1++;
+                }
+
+            }
+
+        </td>
+    </tr>
+
+    <tr>
+        <td></td>
+        <td></td>
+        <td><p><a href="#" class="link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Пылесос</a></p></td>
+        <td style="margin-left: 30px;">12</td>
+        <td>
+            <div class="d-flex">
+                <button class="btn btn-outline-primary" style="margin-right: 30px;" @onclick="IncrementCount3">-</button>
+
+                <div role="status"> @currentCount3</div>
+
+                <button class="btn btn-outline-primary" style="margin-left: 30px;" @onclick="IncrementCount4">+</button>
+            </div>
+
+            @code {
+                private int currentCount3 = 0;
+
+                private void IncrementCount3()
+                {
+                    currentCount3--;
+                }
+
+                private void IncrementCount4()
+                {
+                    currentCount3++;
+                }
+
+            }
+
+        </td>
+    </tr>
+
+    <tr>
+        <td></td>
+        <td></td>
+        <td>Кофеварка</td>
+        <td style="margin-left: 30px;">23</td>
+        <td>
+            <div class="d-flex">
+                <button class="btn btn-outline-primary" style="margin-right: 30px;" @onclick="IncrementCount5">-</button>
+
+                <div role="status"> @currentCount5</div>
+
+                <button class="btn btn-outline-primary" style="margin-left: 30px;" @onclick="IncrementCount6">+</button>
+            </div>
+
+            @code {
+                private int currentCount5 = 0;
+
+                private void IncrementCount5()
+                {
+                    currentCount5--;
+                }
+
+                private void IncrementCount6()
+                {
+                    currentCount5++;
+                }
+
+            }
+
+        </td>
+           
+    </tr>
+        
+        
+    <tr>
+       
+        <td><div class="form-check">
+              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+              <label class="form-check-label" for="exampleRadios2">
+                Заберу от сюда
+              </label>
+            </div>
+</td>
+        <td>Магазин №2 (пл.Мира 23)</td>
+        <td>Утюг</td>
+        <td style="margin-left: 30px;">9</td>
+        <td>
+            <div class="d-flex">
+                <button class="btn btn-outline-primary" style="margin-right: 30px;" @onclick="IncrementCount7">-</button>
+
+                <div role="status"> @currentCount7</div>
+
+                <button class="btn btn-outline-primary" style="margin-left: 30px;" @onclick="IncrementCount8">+</button>
+            </div>
+
+            @code {
+                private int currentCount7 = 0;
+
+                private void IncrementCount7()
+                {
+                    currentCount7--;
+                }
+
+                private void IncrementCount8()
+                {
+                    currentCount7++;
+                }
+
+            }
+
+        </td>
+    </tr>
+
+    <tr>
+        <td></td>
+        <td></td>
+        <td>Пылесос</td>
+        <td style="margin-left: 30px;">7</td>
+        <td>
+            <div class="d-flex">
+                <button class="btn btn-outline-primary" style="margin-right: 30px;" @onclick="IncrementCount9">-</button>
+
+                <div role="status"> @currentCount9</div>
+
+                <button class="btn btn-outline-primary" style="margin-left: 30px;" @onclick="IncrementCount10">+</button>
+            </div>
+
+            @code {
+                private int currentCount9 = 0;
+
+                private void IncrementCount9()
+                {
+                    currentCount9--;
+                }
+
+                private void IncrementCount10()
+                {
+                    currentCount9++;
+                }
+
+            }
+
+        </td>
+    </tr>
+        
+
+    </tbody>
+</table>
+
+<div class="d-flex flex-row-reverse">
+    
+  <form action="http://localhost:5182/request">
+        <button type="submit">Заказать</button>
+      </form>  
+</div>
+
+
+
+@*<PageTitle>Weather</PageTitle>
+
+<h1>Каталог товаров</h1>
+
+<p>This component demonstrates showing data.</p>
+
+@if (forecasts == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Date</th>
+            <th>Temp. (C)</th>
+            <th>Temp. (F)</th>
+            <th>Summary</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var forecast in forecasts)
+        {
+            <tr>
+                <td>@forecast.Date.ToShortDateString()</td>
+                <td>@forecast.TemperatureC</td>
+                <td>@forecast.TemperatureF</td>
+                <td>@forecast.Summary</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+
+@code {
+    private WeatherForecast[]? forecasts;
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Simulate asynchronous loading to demonstrate streaming rendering
+        await Task.Delay(500);
+
+        var startDate = DateOnly.FromDateTime(DateTime.Now);
+        var summaries = new[] { "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching" };
+        forecasts = Enumerable.Range(1, 5).Select(index => new WeatherForecast
+        {
+            Date = startDate.AddDays(index),
+            TemperatureC = Random.Shared.Next(-20, 55),
+            Summary = summaries[Random.Shared.Next(summaries.Length)]
+        }).ToArray();
+    }
+
+    private class WeatherForecast
+    {
+        public DateOnly Date { get; set; }
+        public int TemperatureC { get; set; }
+        public string? Summary { get; set; }
+        public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+    }
+}*@

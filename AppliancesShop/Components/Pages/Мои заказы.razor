@@ -1,0 +1,23 @@
+﻿@page "/counter"
+@rendermode InteractiveServer
+
+<PageTitle>Заказы</PageTitle>
+
+<h1>История заказов</h1>
+
+<h2>Статус заказов</h2>
+
+
+
+@*<p role="status">Current count: @currentCount</p>
+
+<button class="btn btn-error" @onclick="IncrementCount">Click me</button>
+
+@code {
+    private int currentCount = 0;
+
+    private void IncrementCount()
+    {
+        currentCount++;
+    }
+}*@
