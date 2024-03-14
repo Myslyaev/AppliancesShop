@@ -11,4 +11,8 @@
   <ItemGroup>
     <Compile Remove="Components\Pages\ееее.cs" />
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AppliancesShop.BLL\AppliancesShop.BLL.csproj" />
+  </ItemGroup>
 </Project>

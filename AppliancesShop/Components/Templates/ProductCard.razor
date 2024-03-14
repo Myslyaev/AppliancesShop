@@ -1,0 +1,15 @@
+﻿
+<div>
+	<p>@product.Name</p>
+	<p>@product.Price</p>
+	<p>@product.Description</p>
+	<p><img src="@product.Img"></p>
+</div>
+
+
+@code 
+{
+	[Parameter]
+	public ProductOutputModel product { get; set; }
+
+}
