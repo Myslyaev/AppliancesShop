@@ -9,247 +9,280 @@
 @*<p>This component demonstrates showing data.</p>*@
 
 
+@code
+{
+	[Parameter]
+	public int Id { get; set; }
+
+	private string _name;
+
+	private int _price;
+
+	private string _description;
+
+	private string _img;
+
+	private IProductService _productService;
+
+	public Products()
+	{
+		_productService = new ProductServiceMock();
+	}
+
+	protected override void OnInitialized()
+	{
+		var p = _productService.GetProductById(2);
+		_name = p.Name;
+		_price = p.Price;
+		_description = p.Description;
+		_img = p.Img;
+
+	}
+}
 
 <table class="table">
-    <thead>
-    <tr>
-        <th>Где заберете</th>
-        <th>Магазин</th>
-        <th>Товар</th>
-        <th>Кол-во в магазине шт.</th>
-        <th>Выбрать шт.</th>
-    </tr>
-        
-       
-    </thead>
-    <tbody>
-        
-    <tr>
-        <td><div class="form-check">
-              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-              <label class="form-check-label" for="exampleRadios1">
-                Заберу здесь 
-              </label>
-            </div>
-</td>
-        <td>Магазин №1 (Ул.Труда 4)</td>
-        <td><p><a class="link-opacity-50-hover" href="https://market.yandex.ru/product--kholodilniks-nizhnei-morozilnoi-kameroi-grundig-gqn20130lxbr-no-frost-stalnoi-antratsit/33091063?sku=102543826499&do-waremd5=xSNUKz4R0YNRdUbzk5M_mw&uniqueId=93014734">Холодильник</a></p></td>
-        <td>3</td>
-        <td>
-            <div class="d-flex">
-                <button class="btn btn-outline-primary" style="margin-right: 30px;" @onclick="IncrementCount1">-</button>
-
-                <div role="status"> @currentCount1</div>
-
-                <button class="btn btn-outline-primary" style="margin-left: 30px;" @onclick="IncrementCount2">+</button>
-            </div>
-
-            @code {
-                private int currentCount1 = 0;
-
-                private void IncrementCount1()
-                {
-                    currentCount1--;
-                }
-
-                private void IncrementCount2()
-                {
-                    currentCount1++;
-                }
-
-            }
-
-        </td>
-    </tr>
-
-    <tr>
-        <td></td>
-        <td></td>
-        <td>
-            <p><a class="link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" @onclick="ToggleModal">Пылесос</a></p>
-            
-            <div class="@modalClass" tabindex="-1" style="display: @displayMode;" >
-                <div class="modal-dialog" >
-                    <div class="modal-content" >
-                        <div class="modal-header" >
-                            <h5 class="modal-title" >Modal title</h5>
-                            <button class="close" @onclick="ToggleModal" aria-label="Close" >
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            @ChildContent
-                        </div>
-                        <div class="modal-footer">
-                            <button class="btn btn-secondary"  @onclick="ToggleModal">Close</button>
-                            <button class="btn btn-primary">Save changes</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </td>
-        
-            @code {
-
-                bool open = false;
-                string modalClass => open ? "modal fade show" : "modal fade";
-                string displayMode => open ? "block" : "none";
+	<thead>
+		<tr>
+			<th>Где заберете</th>
+			<th>Магазин</th>
+			<th>Товар</th>
+			<th>Кол-во в магазине шт.</th>
+			<th>Выбрать шт.</th>
+		</tr>
 
 
-                private void ToggleModal()
-                {
-                    open = !open;       
-                    StateHasChanged();
-                }
+	</thead>
+	<tbody>
 
-                [Parameter]
-                public RenderFragment ChildContent { get; set; }
+		<tr>
+			<td>
+				<div class="form-check">
+					<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+					<label class="form-check-label" for="exampleRadios1">
+						Заберу здесь
+					</label>
+				</div>
+			</td>
+			<td>Магазин №1 (Ул.Труда 4)</td>
+			<td><p><a class="link-opacity-50-hover" href="https://market.yandex.ru/product--kholodilniks-nizhnei-morozilnoi-kameroi-grundig-gqn20130lxbr-no-frost-stalnoi-antratsit/33091063?sku=102543826499&do-waremd5=xSNUKz4R0YNRdUbzk5M_mw&uniqueId=93014734">Холодильник</a></p></td>
+			<td>3</td>
+			<td>
+				<div class="d-flex">
+					<button class="btn btn-outline-primary" style="margin-right: 30px;" @onclick="IncrementCount1">-</button>
 
-                
-        }
-        
-        <td style="margin-left: 30px;">12</td>
-        <td>
-            <div class="d-flex">
-                <button class="btn btn-outline-primary" style="margin-right: 30px;" @onclick="IncrementCount3">-</button>
+					<div role="status"> @currentCount1</div>
 
-                <div role="status"> @currentCount3</div>
+					<button class="btn btn-outline-primary" style="margin-left: 30px;" @onclick="IncrementCount2">+</button>
+				</div>
 
-                <button class="btn btn-outline-primary" style="margin-left: 30px;" @onclick="IncrementCount4">+</button>
-            </div>
+				@code {
+					private int currentCount1 = 0;
 
-            @code {
-                private int currentCount3 = 0;
+					private void IncrementCount1()
+					{
+						currentCount1--;
+					}
 
-                private void IncrementCount3()
-                {
-                    currentCount3--;
-                }
+					private void IncrementCount2()
+					{
+						currentCount1++;
+					}
 
-                private void IncrementCount4()
-                {
-                    currentCount3++;
-                }
+				}
 
-            }
+			</td>
+		</tr>
 
-        </td>
-    </tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td>
+				<p><a class="link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" @onclick="ToggleModal">@_name</a></p>
 
-    <tr>
-        <td></td>
-        <td></td>
-        <td>Кофеварка</td>
-        <td style="margin-left: 30px;">23</td>
-        <td>
-            <div class="d-flex">
-                <button class="btn btn-outline-primary" style="margin-right: 30px;" @onclick="IncrementCount5">-</button>
+				<div class="@modalClass" tabindex="-1" style="display: @displayMode;">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title">@_name</h5>
+								<button class="close" @onclick="ToggleModal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								<p><img src="@_img"></p>
+								<p>@_price рублей</p>
+								<p>@_description</p>
+							</div>
+							<div class="modal-footer">
+								<button class="btn btn-secondary" @onclick="ToggleModal">Close</button>
+								@* <button class="btn btn-primary">Save changes</button> *@
+							</div>
+						</div>
+					</div>
+				</div>
+			</td>
 
-                <div role="status"> @currentCount5</div>
+			@code {
 
-                <button class="btn btn-outline-primary" style="margin-left: 30px;" @onclick="IncrementCount6">+</button>
-            </div>
+				bool open = false;
+				string modalClass => open ? "modal fade show" : "modal fade";
+				string displayMode => open ? "block" : "none";
 
-            @code {
-                private int currentCount5 = 0;
 
-                private void IncrementCount5()
-                {
-                    currentCount5--;
-                }
+				private void ToggleModal()
+				{
+					open = !open;
+					StateHasChanged();
+				}
 
-                private void IncrementCount6()
-                {
-                    currentCount5++;
-                }
+				[Parameter]
+				public RenderFragment ChildContent { get; set; }
 
-            }
+			}
 
-        </td>
-           
-    </tr>
-        
-        
-    <tr>
-       
-        <td><div class="form-check">
-              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-              <label class="form-check-label" for="exampleRadios2">
-                Заберу здесь
-              </label>
-            </div>
-</td>
-        <td>Магазин №2 (пл.Мира 23)</td>
-        <td>Утюг</td>
-        <td style="margin-left: 30px;">9</td>
-        <td>
-            <div class="d-flex">
-                <button class="btn btn-outline-primary" style="margin-right: 30px;" @onclick="IncrementCount7">-</button>
+			<td style="margin-left: 30px;">12</td>
+			<td>
+				<div class="d-flex">
+					<button class="btn btn-outline-primary" style="margin-right: 30px;" @onclick="IncrementCount3">-</button>
 
-                <div role="status"> @currentCount7</div>
+					<div role="status"> @currentCount3</div>
 
-                <button class="btn btn-outline-primary" style="margin-left: 30px;" @onclick="IncrementCount8">+</button>
-            </div>
+					<button class="btn btn-outline-primary" style="margin-left: 30px;" @onclick="IncrementCount4">+</button>
+				</div>
 
-            @code {
-                private int currentCount7 = 0;
+				@code {
+					private int currentCount3 = 0;
 
-                private void IncrementCount7()
-                {
-                    currentCount7--;
-                }
+					private void IncrementCount3()
+					{
+						currentCount3--;
+					}
 
-                private void IncrementCount8()
-                {
-                    currentCount7++;
-                }
+					private void IncrementCount4()
+					{
+						currentCount3++;
+					}
 
-            }
+				}
 
-        </td>
-    </tr>
+			</td>
+		</tr>
 
-    <tr>
-        <td></td>
-        <td></td>
-        <td>Пылесос</td>
-        <td style="margin-left: 30px;">7</td>
-        <td>
-            <div class="d-flex">
-                <button class="btn btn-outline-primary" style="margin-right: 30px;" @onclick="IncrementCount9">-</button>
+		<tr>
+			<td></td>
+			<td></td>
+			<td>Кофеварка</td>
+			<td style="margin-left: 30px;">23</td>
+			<td>
+				<div class="d-flex">
+					<button class="btn btn-outline-primary" style="margin-right: 30px;" @onclick="IncrementCount5">-</button>
 
-                <div role="status"> @currentCount9</div>
+					<div role="status"> @currentCount5</div>
 
-                <button class="btn btn-outline-primary" style="margin-left: 30px;" @onclick="IncrementCount10">+</button>
-            </div>
+					<button class="btn btn-outline-primary" style="margin-left: 30px;" @onclick="IncrementCount6">+</button>
+				</div>
 
-            @code {
-                private int currentCount9 = 0;
+				@code {
+					private int currentCount5 = 0;
 
-                private void IncrementCount9()
-                {
-                    currentCount9--;
-                }
+					private void IncrementCount5()
+					{
+						currentCount5--;
+					}
 
-                private void IncrementCount10()
-                {
-                    currentCount9++;
-                }
+					private void IncrementCount6()
+					{
+						currentCount5++;
+					}
 
-            }
+				}
 
-        </td>
-    </tr>
-        
+			</td>
 
-    </tbody>
+		</tr>
+
+
+		<tr>
+
+			<td>
+				<div class="form-check">
+					<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+					<label class="form-check-label" for="exampleRadios2">
+						Заберу здесь
+					</label>
+				</div>
+			</td>
+			<td>Магазин №2 (пл.Мира 23)</td>
+			<td>Утюг</td>
+			<td style="margin-left: 30px;">9</td>
+			<td>
+				<div class="d-flex">
+					<button class="btn btn-outline-primary" style="margin-right: 30px;" @onclick="IncrementCount7">-</button>
+
+					<div role="status"> @currentCount7</div>
+
+					<button class="btn btn-outline-primary" style="margin-left: 30px;" @onclick="IncrementCount8">+</button>
+				</div>
+
+				@code {
+					private int currentCount7 = 0;
+
+					private void IncrementCount7()
+					{
+						currentCount7--;
+					}
+
+					private void IncrementCount8()
+					{
+						currentCount7++;
+					}
+
+				}
+
+			</td>
+		</tr>
+
+		<tr>
+			<td></td>
+			<td></td>
+			<td>Пылесос</td>
+			<td style="margin-left: 30px;">7</td>
+			<td>
+				<div class="d-flex">
+					<button class="btn btn-outline-primary" style="margin-right: 30px;" @onclick="IncrementCount9">-</button>
+
+					<div role="status"> @currentCount9</div>
+
+					<button class="btn btn-outline-primary" style="margin-left: 30px;" @onclick="IncrementCount10">+</button>
+				</div>
+
+				@code {
+					private int currentCount9 = 0;
+
+					private void IncrementCount9()
+					{
+						currentCount9--;
+					}
+
+					private void IncrementCount10()
+					{
+						currentCount9++;
+					}
+
+				}
+
+			</td>
+		</tr>
+
+
+	</tbody>
 </table>
 
 <div class="d-flex flex-row-reverse">
-    
-  <form action="http://localhost:5182/request">
-        <button type="submit">Заказать</button>
-      </form>  
+
+	<form action="http://localhost:5182/request">
+		<button type="submit">Заказать</button>
+	</form>
 </div>
 
 

@@ -6,27 +6,3 @@
 <h1>Ваш номер заказа 344К</h1>
 
 <h3>Мы уведомим Вас когда его можно забрать</h3>
-
-
-<div>
-    @foreach (var i in _products)
-    {
-    <ProductCard product=i></ProductCard>
-    }
-
-</div>
-
-@code
-{
-    private List<ProductOutputModel> _products;
-
-    private IProductService _productService;
-
-    public Request()
-    {
-        _productService = new ProductServiceMock();
-
-        _products = _productService.GetAllProducts();
-
-    }
-}
