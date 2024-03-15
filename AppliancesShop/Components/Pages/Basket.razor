@@ -2,13 +2,6 @@
 @attribute [StreamRendering]
 @rendermode InteractiveServer
 
-<PageTitle>Products</PageTitle>
-
-<h1>Каталог товаров</h1>
-
-@*<p>This component demonstrates showing data.</p>*@
-
-
 @code
 {
 	[Parameter]
@@ -50,8 +43,7 @@
 			<th>Товар</th>
 			<th>Выбрать шт.</th>
 		</tr>
-
-
+	
 	</thead>
 	<tbody>
 
@@ -69,7 +61,7 @@
 				</div>
 
 				@code {
-					private int currentCount1 = 0;
+					private int currentCount1 = 1;
 
 					private void IncrementCount1()
 					{
@@ -80,7 +72,6 @@
 					{
 						currentCount1++;
 					}
-
 				}
 
 			</td>
@@ -142,7 +133,7 @@
 				</div>
 
 				@code {
-					private int currentCount3 = 0;
+					private int currentCount3 = 1;
 
 					private void IncrementCount3()
 					{
@@ -172,7 +163,7 @@
 				</div>
 
 				@code {
-					private int currentCount5 = 0;
+					private int currentCount5 = 1;
 
 					private void IncrementCount5()
 					{
