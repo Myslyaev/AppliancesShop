@@ -13,6 +13,8 @@ namespace AppliancesShop.DAL
 
 		public DbSet<ProductDto> Products { get; set; }
 
+		public DbSet<ProductTypeDto> ProductTypes { get; set; }
+
 		public DbSet<ProductRequestDto> Products_Requests { get; set; }
 
 		public DbSet<RequestDto> Requests { get; set; }
@@ -23,7 +25,7 @@ namespace AppliancesShop.DAL
 
 		public Context() 
 		{
-			Database.EnsureCreated();
+			//Database.EnsureCreated();
 		}
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
