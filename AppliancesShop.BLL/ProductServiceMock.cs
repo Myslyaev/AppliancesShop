@@ -1,5 +1,6 @@
 ﻿using AppliancesShop.BLL.IServices;
-using AppliancesShop.BLL.Models;
+using AppliancesShop.BLL.Models.InputModels;
+using AppliancesShop.BLL.Models.OutputModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
