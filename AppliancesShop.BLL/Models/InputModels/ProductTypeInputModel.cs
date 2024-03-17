@@ -3,5 +3,7 @@
     public class ProductTypeInputModel
     {
         public string? Name { get; set; }
-    }
+
+		public string? Img { get; set; }
+	}
 }

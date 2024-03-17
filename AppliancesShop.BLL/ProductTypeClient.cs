@@ -7,26 +7,25 @@ using AutoMapper;
 
 namespace AppliancesShop.BLL
 {
-	public class ProductClient
+	public class ProductTypeClient
 	{
-		private IProductRepository _productRepository;
+		private IProductTypeRepository _productTypeRepository;
 		private Mapper _mapper;
 
-		public ProductClient()
+		public ProductTypeClient()
 		{
-			_productRepository = new ProductRepository();
+			_productTypeRepository = new ProductTypeRepository();
 			var config = new MapperConfiguration(cfg =>
 			{
-				cfg.AddProfile(new ProductMappingProfile());
 				cfg.AddProfile(new ProductTypeMappingProfile());
 			});
 			_mapper = new Mapper(config);
 		}
 
-		public List<ProductOutputModel> GetAllProducts()
+		public List<ProductTypeOutputModel> GetAllProductTypes()
 		{
-			List<ProductDto> productDtos = _productRepository.GetAllProducts();
-			return _mapper.Map<List<ProductOutputModel>>(productDtos);
+			List<ProductTypeDto> productTypeDtos = _productTypeRepository.GetAllProductTypes();
+			return _mapper.Map<List<ProductTypeOutputModel>>(productTypeDtos);
 
 		}
 	}

@@ -1,24 +1,34 @@
-﻿using AppliancesShop.DAL;
+﻿using AppliancesShop.BLL;
+using AppliancesShop.DAL;
 using AppliancesShop.DAL.Dtos;
 
 Context context = SingletoneStorage.GetStorage().Context;
 
-context.Shops.Add(new ShopDto()
-{
-	Name = "Магазин №1",
-	Adress ="ул. Труда 4"
-});
-context.SaveChanges();
-
-//context.ProductTypes.Add(new ProductTypeDto()
+//context.Shops.Add(new ShopDto()
 //{
-//	Name = "Пылесос"
+//	Name = "Магазин №1",
+//	Adress = "ул. Труда 4"
 //});
 //context.SaveChanges();
 
 //context.ProductTypes.Add(new ProductTypeDto()
 //{
-//	Name = "Микроволновая печь"
+//	Name = "Пылесос",
+//	Img=""
+//});
+//context.SaveChanges();
+
+//context.ProductTypes.Add(new ProductTypeDto()
+//{
+//	Name = "Микроволновая печь",
+//	Img = ""
+//});
+//context.SaveChanges();
+
+//context.ProductTypes.Add(new ProductTypeDto()
+//{
+//	Name = "Микроволновая печь",
+//	Img = ""
 //});
 //context.SaveChanges();
 
@@ -51,3 +61,24 @@ context.SaveChanges();
 //	Img = "https://holod.ru/pics/clean/medium/31/874931_0.jpg"
 //});
 //context.SaveChanges();
+
+
+//ProductTypeRepository productTypeRepository = new();
+
+//var productTypes = productTypeRepository.GetAllProductTypes();
+
+//Console.WriteLine();
+
+
+//ProductTypeClient productTypeClient= new ();
+
+//var productTypes = productTypeClient.GetAllProductTypes();
+
+//Console.WriteLine();
+
+
+//ProductClient productClient = new();
+
+//var products = productClient.GetAllProducts();
+
+//Console.WriteLine();
