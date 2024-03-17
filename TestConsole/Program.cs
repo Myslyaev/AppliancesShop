@@ -3,11 +3,12 @@ using AppliancesShop.DAL.Dtos;
 
 Context context = SingletoneStorage.GetStorage().Context;
 
-//context.ProductTypes.Add(new ProductTypeDto()
-//{
-//	Name = "Холодильник"
-//});
-//context.SaveChanges();
+context.Shops.Add(new ShopDto()
+{
+	Name = "Магазин №1",
+	Adress ="ул. Труда 4"
+});
+context.SaveChanges();
 
 //context.ProductTypes.Add(new ProductTypeDto()
 //{
