@@ -10,7 +10,7 @@
 
 		public string? PhoneNumber { get; set; }
 
-		public Roles? Role { get; set; }
+		public Constants? Role { get; set; }
 
 		public string? Mail { get; set; }
 
