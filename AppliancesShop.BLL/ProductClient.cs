@@ -27,7 +27,6 @@ namespace AppliancesShop.BLL
 		{
 			List<ProductDto> productDtos = _productRepository.GetAllProducts();
 			return _mapper.Map<List<ProductOutputModel>>(productDtos);
-
 		}
 	}
 }

@@ -6,29 +6,43 @@ Context context = SingletoneStorage.GetStorage().Context;
 
 //context.Shops.Add(new ShopDto()
 //{
-//	Name = "Магазин №1",
-//	Adress = "ул. Труда 4"
+//	Name = "Магазин на Сенной",
+//	Adress = "пл. Труда 4"
+//});
+//context.SaveChanges();
+
+//context.Shops.Add(new ShopDto()
+//{
+//	Name = "Магазин на Лесной",
+//	Adress = "ул. Кантемировская 26"
+//});
+//context.SaveChanges();
+
+//context.Shops.Add(new ShopDto()
+//{
+//	Name = "Магазин в Озерках",
+//	Adress = "пр. Энгельса 111"
+//});
+//context.SaveChanges();
+
+//context.ProductTypes.Add(new ProductTypeDto()
+//{
+//	Name = "Холодильник",
+//	Img="./images/fridge.png"
 //});
 //context.SaveChanges();
 
 //context.ProductTypes.Add(new ProductTypeDto()
 //{
 //	Name = "Пылесос",
-//	Img=""
+//	Img = "./images/vacuumcleaner.png"
 //});
 //context.SaveChanges();
 
 //context.ProductTypes.Add(new ProductTypeDto()
 //{
 //	Name = "Микроволновая печь",
-//	Img = ""
-//});
-//context.SaveChanges();
-
-//context.ProductTypes.Add(new ProductTypeDto()
-//{
-//	Name = "Микроволновая печь",
-//	Img = ""
+//	Img = "./images/microvawe.png"
 //});
 //context.SaveChanges();
 
@@ -70,7 +84,7 @@ Context context = SingletoneStorage.GetStorage().Context;
 //Console.WriteLine();
 
 
-//ProductTypeClient productTypeClient= new ();
+//ProductTypeClient productTypeClient = new();
 
 //var productTypes = productTypeClient.GetAllProductTypes();
 
