@@ -1,0 +1,23 @@
+
+@page "/categories"
+@rendermode InteractiveServer
+
+<PageTitle>Категории заказов</PageTitle>
+
+<h3>Категории заказов</h3>
+
+<div class="card">
+    <div class="card-body">
+        <h6 class="card-subtitle mb-2 text-muted">24/08/2023</h6>
+        <p class="card-text">"@dsafj"</p>
+        <a href="/products" class="card-link">Смотреть в каталоге</a>
+    </div>
+</div>
+
+
+@code
+{
+    ProductTypeClient productTypeClient = new();
+    var dsafj = productTypeClient.getAllProducts
+
+}
