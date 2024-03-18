@@ -1,5 +1,6 @@
 ﻿using AppliancesShop.BLL.IServices;
-using AppliancesShop.BLL.Models;
+using AppliancesShop.BLL.Models.InputModels;
+using AppliancesShop.BLL.Models.OutputModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,8 @@ namespace AppliancesShop.BLL
     public class ProductServiceMock : IProductService
     {
         private List<ProductOutputModel> _outputModels;
+
+        private List<ProductTypeOutputModel> _outputTypes;
 
         public ProductServiceMock()
         {
@@ -61,7 +64,12 @@ namespace AppliancesShop.BLL
             return _outputModels;
         }
 
-        public ProductOutputModel GetProductById(int id)
+		public List<ProductTypeOutputModel> GetAllProductTypes()
+		{
+			return _outputTypes;
+		}
+
+		public ProductOutputModel GetProductById(int id)
         {
             return _outputModels[id-1];
         }
