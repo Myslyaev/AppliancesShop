@@ -1,5 +1,6 @@
 ﻿using AppliancesShop.BLL.Models.InputModels;
 using AppliancesShop.BLL.Models.OutputModels;
+using AppliancesShop.DAL.Dtos;
 using AppliancesShop.DAL.IRepositories;
 using AutoMapper;
 using System;
@@ -17,5 +18,7 @@ namespace AppliancesShop.BLL.IServices
         public List<ProductOutputModel> GetAllProducts();
 
         public ProductOutputModel GetProductById(int id);
+
+        public List<ProductTypeOutputModel> GetAllProductTypes();
     }
 }

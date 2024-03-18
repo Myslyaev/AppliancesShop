@@ -1,4 +1,5 @@
 ﻿using AppliancesShop.BLL.Mapping;
+using AppliancesShop.BLL.Models.InputModels;
 using AppliancesShop.BLL.Models.OutputModels;
 using AppliancesShop.DAL;
 using AppliancesShop.DAL.Dtos;
@@ -26,6 +27,11 @@ namespace AppliancesShop.BLL
 		{
 			List<ProductTypeDto> productTypeDtos = _productTypeRepository.GetAllProductTypes();
 			return _mapper.Map<List<ProductTypeOutputModel>>(productTypeDtos);
+		}
+
+		public void AddProductType(ProductTypeInputModel productType)
+		{
+			_productTypeRepository.AddProductType(_mapper.Map<ProductTypeDto>(productType));
 		}
 	}
 }

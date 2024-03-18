@@ -13,6 +13,8 @@ namespace AppliancesShop.BLL
     {
         private List<ProductOutputModel> _outputModels;
 
+        private List<ProductTypeOutputModel> _outputTypes;
+
         public ProductServiceMock()
         {
             _outputModels = new List<ProductOutputModel>()
@@ -62,7 +64,12 @@ namespace AppliancesShop.BLL
             return _outputModels;
         }
 
-        public ProductOutputModel GetProductById(int id)
+		public List<ProductTypeOutputModel> GetAllProductTypes()
+		{
+			return _outputTypes;
+		}
+
+		public ProductOutputModel GetProductById(int id)
         {
             return _outputModels[id-1];
         }

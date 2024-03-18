@@ -95,4 +95,6 @@ Context context = SingletoneStorage.GetStorage().Context;
 
 //var products = productClient.GetAllProducts();
 
+
+
 //Console.WriteLine();
