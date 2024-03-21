@@ -18,7 +18,7 @@ namespace AppliancesShop.DAL
 
 		public List<ProductTypeDto> GetAllProductTypes()
 		{
-			using (Context context = SingletoneStorage.GetStorage().Context)
+			Context context = SingletoneStorage.GetStorage().Context;
 			{
 				return context.ProductTypes.ToList();
 			}

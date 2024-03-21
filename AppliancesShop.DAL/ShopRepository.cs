@@ -7,7 +7,7 @@ namespace AppliancesShop.DAL
 	{
 		public List<ShopDto> GetAllShops()
 		{
-			using (Context context = SingletoneStorage.GetStorage().Context)
+			Context context = SingletoneStorage.GetStorage().Context;
 			{
 				return context.Shops.ToList();
 			}

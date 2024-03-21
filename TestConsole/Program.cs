@@ -1,4 +1,5 @@
 ﻿using AppliancesShop.BLL;
+using AppliancesShop.BLL.Models.OutputModels;
 using AppliancesShop.DAL;
 using AppliancesShop.DAL.Dtos;
 
@@ -86,7 +87,13 @@ Context context = SingletoneStorage.GetStorage().Context;
 
 //ProductTypeClient productTypeClient = new();
 
-//var productTypes = productTypeClient.GetAllProductTypes();
+//List<ProductTypeOutputModel> productTypes = productTypeClient.GetAllProductTypes();
+
+//foreach (ProductTypeOutputModel i in productTypes)
+//{
+//	Console.WriteLine(i.Name);
+//	Console.WriteLine(i.Img);
+//}	
 
 //Console.WriteLine();
 
