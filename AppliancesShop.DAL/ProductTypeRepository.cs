@@ -9,9 +9,9 @@ namespace AppliancesShop.DAL
 	{
 		public void AddProductType(ProductTypeDto productType)
 		{
-			//using (Context context = SingletoneStorage.GetStorage().Context)
+			//Context context = SingletoneStorage.GetStorage().Context;
 			//{
-			//	context.ProductTypes.Add(new ProductTypeDto() {productType.Name, productType.Img });
+			//	context.ProductTypes.Add(new ProductTypeDto() { productType.Name, productType.Img });
 			//	context.SaveChanges();
 			//}
 		}

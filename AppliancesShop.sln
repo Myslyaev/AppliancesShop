@@ -7,9 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppliancesShop", "Appliance
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppliancesShop.BLL", "AppliancesShop.BLL\AppliancesShop.BLL.csproj", "{BA021B46-9AE4-453C-860A-FD21D1373BA4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppliancesShop.DAL", "AppliancesShop.DAL\AppliancesShop.DAL.csproj", "{C8A52F0D-5938-415D-91DD-F07412185682}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppliancesShop.DAL", "AppliancesShop.DAL\AppliancesShop.DAL.csproj", "{C8A52F0D-5938-415D-91DD-F07412185682}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestConsole", "TestConsole\TestConsole.csproj", "{E5ADA3DE-5C5B-4A76-B4A1-9FC4DA45C729}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestConsole", "TestConsole\TestConsole.csproj", "{E5ADA3DE-5C5B-4A76-B4A1-9FC4DA45C729}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

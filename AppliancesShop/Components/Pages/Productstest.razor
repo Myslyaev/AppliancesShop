@@ -1,0 +1,31 @@
+﻿@page "/productstest"
+@using AppliancesShop.BLL.Models.OutputModels
+
+<PageTitle>Каталог товаров тест</PageTitle>
+<table align="center">
+    <tr>
+    @foreach (var i in _productTypes)
+    {
+            <td width="300px">
+        <ProductTypeCard productType=i></ProductTypeCard>
+            </td>
+    }
+    </tr>
+</table>
+
+@code
+{
+    private List<ProductTypeOutputModel> _productTypes;
+
+    private ProductTypeClient _productTypeClient;
+
+    public Productstest()
+    {
+        _productTypeClient = new ProductTypeClient();
+    }
+
+    protected override void OnInitialized()
+    {
+        _productTypes = _productTypeClient.GetAllProductTypes();
+    }
+}
