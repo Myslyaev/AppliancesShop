@@ -15,4 +15,8 @@
   <ItemGroup>
     <ProjectReference Include="..\AppliancesShop.BLL\AppliancesShop.BLL.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\images\" />
+  </ItemGroup>
 </Project>

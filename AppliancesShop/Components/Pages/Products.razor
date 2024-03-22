@@ -1,4 +1,5 @@
 ﻿@page "/products"
+@using AppliancesShop.BLL.Models.OutputModels
 @attribute [StreamRendering]
 @rendermode InteractiveServer
 
@@ -19,22 +20,27 @@
 
 	private string _img;
 
-	private IProductService _productService;
+	private List<ProductTypeOutputModel> _productTypes;
+
+	private ProductTypeClient _productTypeClient;
 
 	public Products()
 	{
-		_productService = new ProductServiceMock();
+		_productTypeClient = new ProductTypeClient();
 	}
 
 	protected override void OnInitialized()
 	{
-		var p = _productService.GetProductById(2);
-		_name = p.Name;
-		_price = p.Price;
-		_description = p.Description;
-		_img = p.Img;
+
+		// _name = p.Name;
+		// _price = p.Price;
+		// _description = p.Description;
+		// _img = p.Img;
+		_productTypes = _productTypeClient.GetAllProductTypes();
 
 	}
+
+	
 }
 
 <table class="table">
@@ -60,7 +66,14 @@
 					</label>
 				</div>
 			</td>
-			<td>Магазин №1 (Ул.Труда 4)</td>
+			<td>
+		@foreach (ProductTypeOutputModel i in _productTypes)
+		{
+			_name = i.Name;
+			_img = i.Img;
+		}
+
+			</td>
 			<td><p><a class="link-opacity-50-hover" href="https://market.yandex.ru/product--kholodilniks-nizhnei-morozilnoi-kameroi-grundig-gqn20130lxbr-no-frost-stalnoi-antratsit/33091063?sku=102543826499&do-waremd5=xSNUKz4R0YNRdUbzk5M_mw&uniqueId=93014734">Холодильник</a></p></td>
 			<td>3</td>
 			<td>
