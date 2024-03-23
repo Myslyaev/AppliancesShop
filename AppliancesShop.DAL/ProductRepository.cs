@@ -12,5 +12,13 @@ namespace AppliancesShop.DAL
 				return context.Products.ToList();
 			}
 		}
-	}
+
+        public List<ProductDto> GetProductsByProductTypeId(int productTypeId)
+        {
+            Context context = SingletoneStorage.GetStorage().Context;
+            {
+                return context.Products.Where(ProductDto=>ProductDto.Type.Id== productTypeId).ToList();
+            }
+        }
+    }
 }

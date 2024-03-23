@@ -5,5 +5,6 @@ namespace AppliancesShop.DAL.IRepositories
 	public interface IProductRepository
 	{
 		public List<ProductDto> GetAllProducts();
+		public List<ProductDto> GetProductsByProductTypeId(int productTypeId);
 	}
 }
