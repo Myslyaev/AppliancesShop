@@ -6,6 +6,6 @@ namespace AppliancesShop.DAL.IRepositories
 	{
 		public List<ProductTypeDto> GetAllProductTypes();
 
-		public void AddProductType(ProductTypeDto productType);
+		public ProductTypeDto AddProductType(ProductTypeDto productType);
 	}
 }
