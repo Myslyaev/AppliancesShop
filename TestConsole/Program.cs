@@ -217,6 +217,10 @@ Context context = SingletoneStorage.GetStorage().Context;
 //});
 //context.SaveChanges();
 
+var a=context.Users.ToList();
+
+Console.WriteLine();
+
 ProductTypeRepository productTypeRepository = new();
 
 //var productTypes = productTypeRepository.GetAllProductTypes();
@@ -225,9 +229,9 @@ ProductTypeRepository productTypeRepository = new();
 
 ProductRepository productRepository = new();
 
-var products = productRepository.GetProductsByProductTypeId(2);
+//var products = productRepository.GetProductsByProductTypeId(2);
 
-Console.WriteLine();
+//Console.WriteLine();
 
 
 ProductTypeClient productTypeClient = new();
@@ -246,6 +250,15 @@ ProductTypeClient productTypeClient = new();
 ProductClient productClient = new();
 
 //var products = productClient.GetAllProducts();
+
+//var products = productClient.GetProductsByProductTypeId(1);
+
+
+Console.WriteLine();
+
+UserClient userClient = new();
+
+//var users = userClient.GetAllUsers();
 
 //var products = productClient.GetProductsByProductTypeId(1);
 

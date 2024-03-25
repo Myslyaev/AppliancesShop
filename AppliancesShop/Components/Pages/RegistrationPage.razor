@@ -1,7 +1,6 @@
-﻿@page "/loginfailed"
+﻿@page "/registration"
 @using Microsoft.AspNetCore.Components.Authorization
 @using System.Security.Claims
-@rendermode InteractiveServer
 
 
 <AuthorizeView Roles="Client">
@@ -14,8 +13,7 @@
 
 <AuthorizeView>
     <NotAuthorized>
-        <h1>Вход в личный кабинет</h1>
-        <p>Ошибка! Неправильный логин или пароль. Попробуйте еще раз.</p>
-        <Login></Login>
+        <h2>Регистрация:</h2>
+        <Registration></Registration>
     </NotAuthorized>
 </AuthorizeView>

@@ -1,5 +1,4 @@
-﻿@page "/registration"
-@using AppliancesShop.BLL.Models.InputModels
+﻿@using AppliancesShop.BLL.Models.InputModels
 @using AppliancesShop.BLL.Models.OutputModels
 @attribute [StreamRendering]
 @rendermode InteractiveServer
@@ -8,8 +7,6 @@
 <div>
     <div>
         <form>
-            <h2>Регистрация:</h2>
-
             <div>
                 <label class="text">Фамилия:</label>
                 <input @bind=_user.Surname class="form-control" type="text" placeholder="Введите фамилию" required>
@@ -34,7 +31,7 @@
 
         <div>
             <p></p>
-            <button @onclick=AddUser >Регистрация</button>
+            <button @onclick=AddUser>Регистрация</button>
             <button @onclick=GoHome>Отмена</button>
         </div>
     </div>
@@ -62,9 +59,21 @@
 
     public void AddUser()
     {
-        _users.Add(_userClient.RegisterClient(_user));
+        foreach (UserOutputModel i in _users)
+        {
+            if (i.Mail == _user.Mail)
+            {
+                navManager.NavigateTo("./registrationfailed");
+            }
 
-        navManager.NavigateTo("./");
+            else
+            {
+                _users.Add(_userClient.RegisterClient(_user));
+
+                navManager.NavigateTo("./");
+            }
+        }
+
     }
 
     public void GoHome()

@@ -21,7 +21,7 @@ namespace AppliancesShop.BLL.Models.InputModels
         [Required(ErrorMessage = "Введите номер телефона")]
         public string PhoneNumber { get; set; }
 
-        [Required(ErrorMessage = "Введите значение в поле")]
+        [Required(ErrorMessage = "Введите пароль")]
         public string Password { get; set; }
     }
 }
