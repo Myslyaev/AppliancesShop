@@ -1,192 +1,195 @@
-@page "/basket"
+@page "/basket/{Id:int}"
+@*@page "/productsfortype/{Id:int}"*@
+@using AppliancesShop.BLL.Models.OutputModels
+@using AppliancesShop.BLL.Models.OutputModels
+@using AppliancesShop.DAL
 @attribute [StreamRendering]
 @rendermode InteractiveServer
 
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 @code
 {
+	
 	[Parameter]
 	public int Id { get; set; }
+	
+	private List<ProductOutputModel> _products;
 
-	private string _name;
+	private ProductClient _product;
+	
+	private List<ShopOutputModel> _shops;
 
-	private int _price;
-
-	private string _description;
-
-	private string _img;
-
-	private IProductService _productService;
+	private ShopClient _shop;
 
 	public Basket()
 	{
-		_productService = new ProductServiceMock();
+		_product = new ProductClient();
+		_shop = new ShopClient();
+		
 	}
+	// public Basket()
+	// {
+	// 	_shop = new ShopClient();
+	// }
 
 	protected override void OnInitialized()
 	{
-		// var p = _productService.GetProductById(2);
-		// _name = p.Name;
-		// _price = p.Price;
-		// _description = p.Description;
-		// _img = p.Img;
-
+		_products = _product.GetProductsByProductTypeId(Id);
+		_shops = _shop.GetAllShops();
 	}
 }
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
 
 <PageTitle>Корзина</PageTitle>
 
 <h1>Корзина</h1>
 <table class="table">
 	<thead>
+	<tr>
+		<th>Торвар</th>
+		<th>Цена</th>
+		<th>Описание</th>
+		<th>Выбрать шт.</th>
+	</tr>
+	
+	</thead>
+	
+
+	<tbody>	
+			
+		@foreach (var i in _products)
+		{
+
+			<tr>
+
+				<td>
+					<h4>@i.Name</h4>
+				</td>
+				<td>
+					<div>@i.Price руб</div>
+				</td>
+
+				<td>
+					<p><a class='link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover' @onclick="ToggleModal">Посмотреть</a></p>
+
+					<div class="@modalClass " tabindex="-1" style="display: @displayMode;">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h3 class="modal-title">@i.Name</h3>
+								</div>
+								<div class="modal-body">
+									<p><img src="@i.Img"></p>
+								</div>
+								<div class="modal-content">
+									<h5 class="modal-title">@i.Price руб.</h5>
+								</div>
+								<div class="modal-content">
+									<h5 class="modal-title">@i.Description</h5>
+								</div>
+								<div class="modal-footer">
+									<button class="btn btn-secondary" @onclick="ToggleModal">Close</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</td>
+
+				@code {
+                        
+        				bool open = false;
+        				string modalClass => open ? "modal fade show" : "modal fade";
+        				string displayMode => open ? "block" : "none";
+                        
+                        
+        				private void ToggleModal()
+        				{
+        					open = !open;
+        					StateHasChanged();
+        				}
+                        
+        				[Parameter]
+        				public RenderFragment ChildContent { get; set; }
+                        
+        			}
+				
+			
+				<td>
+					<div class="d-flex">
+						<button class="btn btn-outline-primary" style="margin-right: 30px;" @onclick="IncrementCount1">-</button>
+
+						<div role="status"> @currentCount1</div>
+
+						<button class="btn btn-outline-primary" style="margin-left: 30px;" @onclick="IncrementCount2">+</button>
+					</div>
+
+					@code {
+						private int currentCount1 = 1;
+
+						private void IncrementCount1()
+						{
+							currentCount1--;
+						}
+
+						private void IncrementCount2()
+						{
+							currentCount1++;
+						}
+					}
+
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>
+====================================================================================================================================================================
+
+<h1>Где можно забрать</h1>
+
+<table class="table">
+	<thead>
 		<tr>
 			<th>Заберу из</th>
-			<th>Товар</th>
-			<th>Выбрать шт.</th>
+			<th>Магазин</th>
+			<th>Адрес</th>
+			<th>Кол. шт. в магазине</th>
 		</tr>
 	
 	</thead>
 	<tbody>
+		@foreach (var i in _shops)
+		{
+			<tr>
 
-		<tr>
-			<td>Магазин №1 (Ул.Труда 4)</td>
-			<td><p><a class="link-opacity-50-hover" href="https://market.yandex.ru/product--kholodilniks-nizhnei-morozilnoi-kameroi-grundig-gqn20130lxbr-no-frost-stalnoi-antratsit/33091063?sku=102543826499&do-waremd5=xSNUKz4R0YNRdUbzk5M_mw&uniqueId=93014734">Холодильник</a></p></td>
-			
-			<td>
-				<div class="d-flex">
-					<button class="btn btn-outline-primary" style="margin-right: 30px;" @onclick="IncrementCount1">-</button>
 
-					<div role="status"> @currentCount1</div>
-
-					<button class="btn btn-outline-primary" style="margin-left: 30px;" @onclick="IncrementCount2">+</button>
-				</div>
-
-				@code {
-					private int currentCount1 = 1;
-
-					private void IncrementCount1()
-					{
-						currentCount1--;
-					}
-
-					private void IncrementCount2()
-					{
-						currentCount1++;
-					}
-				}
-
-			</td>
-		</tr>
-
-		<tr>
-			<td></td>
-			<td>
-				<p><a class="link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" @onclick="ToggleModal">@_name</a></p>
-
-				<div class="@modalClass" tabindex="-1" style="display: @displayMode;">
-					<div class="modal-dialog">
-						<div class="modal-content">
-							<div class="modal-header">
-								<h5 class="modal-title">@_name</h5>
-								<button class="close" @onclick="ToggleModal" aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
-							</div>
-							<div class="modal-body">
-								<p><img src="@_img"></p>
-								<p>@_price рублей</p>
-								<p>@_description</p>
-							</div>
-							<div class="modal-footer">
-								<button class="btn btn-secondary" @onclick="ToggleModal">Close</button>
-								@* <button class="btn btn-primary">Save changes</button> *@
-							</div>
-						</div>
+				<td>
+					<div class="form-check">
+						<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+						<label class="form-check-label" for="exampleRadios1">
+							Заберу из
+						</label>
 					</div>
-				</div>
-			</td>
 
-			@code {
+				</td>
+				<td>@i.Name</td>
+				<td>@i.Adress</td>
+				<td>12</td>
 
-				bool open = false;
-				string modalClass => open ? "modal fade show" : "modal fade";
-				string displayMode => open ? "block" : "none";
+			</tr>
 
-
-				private void ToggleModal()
-				{
-					open = !open;
-					StateHasChanged();
-				}
-
-				[Parameter]
-				public RenderFragment ChildContent { get; set; }
-
-			}
-			
-			<td>
-				<div class="d-flex">
-					<button class="btn btn-outline-primary" style="margin-right: 30px;" @onclick="IncrementCount3">-</button>
-
-					<div role="status"> @currentCount3</div>
-
-					<button class="btn btn-outline-primary" style="margin-left: 30px;" @onclick="IncrementCount4">+</button>
-				</div>
-
-				@code {
-					private int currentCount3 = 1;
-
-					private void IncrementCount3()
-					{
-						currentCount3--;
-					}
-
-					private void IncrementCount4()
-					{
-						currentCount3++;
-					}
-
-				}
-
-			</td>
-		</tr>
-
-		<tr>
-			<td></td>
-			<td>Кофеварка</td>
-			<td>
-				<div class="d-flex">
-					<button class="btn btn-outline-primary" style="margin-right: 30px;" @onclick="IncrementCount5">-</button>
-
-					<div role="status"> @currentCount5</div>
-
-					<button class="btn btn-outline-primary" style="margin-left: 30px;" @onclick="IncrementCount6">+</button>
-				</div>
-
-				@code {
-					private int currentCount5 = 1;
-
-					private void IncrementCount5()
-					{
-						currentCount5--;
-					}
-
-					private void IncrementCount6()
-					{
-						currentCount5++;
-					}
-
-				}
-
-			</td>
-
-		</tr>
-
-	</tbody>
+		}
+		</tbody>
 </table>
 
 
+
+=============================================================================================================================================
 <div class="d-flex flex-row-reverse">
 	<form action="http://localhost:5182/request">
 		<button type="submit">Заказать</button>
 	</form>
 </div>
+
+

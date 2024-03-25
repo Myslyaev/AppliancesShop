@@ -1,0 +1,15 @@
+
+<button @onclick="Add">@Step</button>
+
+@code {
+    [Parameter]
+    public Action<string> Action { get; set; }
+    
+    [Parameter]
+    public string Step { get; set; }
+
+    public void Add()
+    {
+        Action(Step);
+    }
+}

@@ -1,0 +1,131 @@
+@page "/productsfortype/{Id:int}"
+@using AppliancesShop.BLL.Models.OutputModels
+@using AppliancesShop.BLL.Models.OutputModels
+@using AppliancesShop.DAL
+@attribute [StreamRendering]
+@rendermode InteractiveServer
+
+<PageTitle>ProductsForType</PageTitle>
+
+<h1>Товары категории</h1>
+
+
+@code
+{
+	
+	[Parameter]
+    public int Id { get; set; }
+	
+    private List<ProductOutputModel> _products;
+
+    private ProductClient _product;
+
+    public ProductsForType()
+    {
+        _product = new ProductClient();
+    }
+
+    protected override void OnInitialized()
+    {
+        _products = _product.GetProductsByProductTypeId(Id);
+    }
+}
+
+================================================================================================================================
+
+<table class="table">
+	<thead>
+	<tr>
+			
+		<th>Товар</th>
+		<th>Цена</th>
+		<th>Картинка</th>
+		<th></th>
+	</tr>
+	</thead>
+	<tbody>
+	@foreach (var i in _products)
+	{
+		
+		<tr>
+			<td>
+				<h4>@i.Name</h4>
+			</td>
+			<td>
+
+				<div>@i.Price руб</div>
+			</td>
+			
+			<td>
+				<p><a class='link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover' @onclick="ToggleModal">Посмотреть</a></p>
+                
+				<div class="@modalClass " tabindex="-1" style="display: @displayMode;">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h3 class="modal-title">@i.Name</h3>
+							</div>
+							<div class="modal-body">
+								<p><img src="@i.Img"></p>
+							</div>
+							<div class="modal-content">
+								<h5 class="modal-title">@i.Price руб.</h5>
+							</div>
+							<div class="modal-content">
+								<h5 class="modal-title">@i.Description</h5>
+							</div>
+							<div class="modal-footer">
+								<button class="btn btn-secondary" @onclick="ToggleModal">Close</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</td>
+                
+			@code {
+                
+				bool open = false;
+				string modalClass => open ? "modal fade show" : "modal fade";
+				string displayMode => open ? "block" : "none";
+                
+                
+				private void ToggleModal()
+				{
+					open = !open;
+					StateHasChanged();
+				}
+                
+				[Parameter]
+				public RenderFragment ChildContent { get; set; }
+                
+			}
+			<td>
+				<AddInBasket Step="Добавить в корзину" Action="Add"></AddInBasket>
+			</td>
+		</tr>
+		
+	}
+	</tbody>
+</table>
+
+<h3>@j</h3>
+@code
+{
+	private string j = "В корзину";
+
+	public void Add(string a)
+	{
+		j = "В корзине";
+		StateHasChanged();
+	}
+	
+}
+
+
+@*<div class="d-flex flex-row-reverse">
+
+	<form action="http://localhost:5182/basket">
+		<button type="submit">Перейти в корзину</button>
+	</form>
+</div>*@
+

@@ -6,7 +6,9 @@
 		{
 			get
 			{
-				return Environment.GetEnvironmentVariable("AppliancesShopDB");
+				var a = Environment.GetEnvironmentVariable("AppliancesShopDB");
+
+				return a;
 			}
 		}
 	}
