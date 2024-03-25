@@ -12,9 +12,9 @@ namespace AppliancesShop.BLL.Models.InputModels
 
 		public Constants? Role { get; set; }
 
-		public string? Mail { get; set; }
+		public string Mail { get; set; }
 
-		public string? Password { get; set; }
+		public string Password { get; set; }
 
 		public List<OrderOutputModel>? Orders { get; set; }
 

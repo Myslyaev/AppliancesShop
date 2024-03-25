@@ -1,23 +1,19 @@
-﻿@page "/"
+﻿@page "/loginfailed"
 @using Microsoft.AspNetCore.Components.Authorization
 @using System.Security.Claims
+@rendermode InteractiveServer
 
 
 <AuthorizeView Roles="Client">
     <Authorized>
-        <p>Вы авторизованы как клиент.</p>
-        <p></p>
-        <p><a href="./logout">Выйти</a></p>
+        Вы авторизованы как клиент
     </Authorized>
 </AuthorizeView>
 
 <AuthorizeView>
     <NotAuthorized>
         <h1>Вход в личный кабинет</h1>
+        <p>Ошибка! Неправильный логин или пароль. Попробуцйте еще раз.</p>
         <Login></Login>
     </NotAuthorized>
 </AuthorizeView>
-
-@code {
-   
-}

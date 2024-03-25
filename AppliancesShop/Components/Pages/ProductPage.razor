@@ -1,0 +1,40 @@
+﻿@page "/productpage/{Id:int}"
+@using AppliancesShop.BLL.Models.OutputModels
+
+<PageTitle>Каталог товаров тест</PageTitle>
+<table align="center">
+    <tr>
+        @foreach (var i in _products)
+        {
+            <td width="300px">
+                <div class="product-type-card">
+                    <p>@i.Name</p>
+                    <p>@i.Type.Id</p>
+                </div>
+            </td>
+        }
+    </tr>
+</table>
+
+@code
+{
+    [Parameter]
+    public int Id { get; set; }
+
+    [Parameter]
+    public ProductOutputModel product { get; set; }
+
+    private List<ProductOutputModel> _products;
+
+    private ProductClient _productClient;
+
+    public ProductPage()
+    {
+        _productClient = new ProductClient();
+    }
+
+    protected override void OnInitialized()
+    {
+        _products = _productClient.GetProductsByProductTypeId(Id);
+    }
+}

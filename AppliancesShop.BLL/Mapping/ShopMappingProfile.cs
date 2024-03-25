@@ -12,6 +12,8 @@ namespace AppliancesShop.BLL.Mapping
 			CreateMap<ShopDto, ShopInputModel>();
 
 			CreateMap<ShopDto, ShopOutputModel>();
+
+			CreateMap<ShopInputModel, ShopOutputModel>();
 		}
 	}
 }
