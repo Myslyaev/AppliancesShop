@@ -19,7 +19,7 @@
         </form>
 
         <div>
-            <button @onclick=AddUser>Добавить</button>
+        <button @onclick=AddNewProductType>Добавить</button>
         </div>
 </div>
 
@@ -42,7 +42,7 @@
         _productType = new ProductTypeInputModel();
     }
 
-    public void AddUser()
+    public void AddNewProductType()
     {
         _productTypes.Add(_productTypeClient.AddProductType(_productType));
     }

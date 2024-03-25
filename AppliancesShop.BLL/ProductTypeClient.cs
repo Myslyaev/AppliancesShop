@@ -26,6 +26,7 @@ namespace AppliancesShop.BLL
 		public List<ProductTypeOutputModel> GetAllProductTypes()
 		{
 			List<ProductTypeDto> productTypeDtos = _productTypeRepository.GetAllProductTypes();
+
 			return _mapper.Map<List<ProductTypeOutputModel>>(productTypeDtos);
 		}
 
@@ -33,6 +34,7 @@ namespace AppliancesShop.BLL
 		{
             ProductTypeDto productTypeDtos= _productTypeRepository.AddProductType(_mapper.Map<ProductTypeDto>(productType));
 			ProductTypeOutputModel productTypeOutput=_mapper.Map<ProductTypeOutputModel>(productTypeDtos);
+
 			return productTypeOutput;
 		}
     }

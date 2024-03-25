@@ -1,0 +1,74 @@
+﻿@page "/registration"
+@using AppliancesShop.BLL.Models.InputModels
+@using AppliancesShop.BLL.Models.OutputModels
+@attribute [StreamRendering]
+@rendermode InteractiveServer
+@inject NavigationManager navManager
+
+<div>
+    <div>
+        <form>
+            <h2>Регистрация:</h2>
+
+            <div>
+                <label class="text">Фамилия:</label>
+                <input @bind=_user.Surname class="form-control" type="text" placeholder="Введите фамилию" required>
+            </div>
+            <div>
+                <label class="text">Имя:</label>
+                <input @bind=_user.Name class="form-control" type="name" placeholder="Введите имя" required>
+            </div>
+            <div>
+                <label class="text">Почта:</label>
+                <input @bind=_user.Mail class="form-control" type="email" placeholder="Введите почту" required>
+            </div>
+            <div>
+                <label class="text">Телефон:</label>
+                <input @bind=_user.PhoneNumber class="form-control" type="t" placeholder="Введите телефон" required>
+            </div>
+            <div>
+                <label class="text">Пароль:</label>
+                <input @bind=_user.Password class="form-control" type="password" placeholder="Введите пароль" required>
+            </div>
+        </form>
+
+        <div>
+            <p></p>
+            <button @onclick=AddUser >Регистрация</button>
+            <button @onclick=GoHome>Отмена</button>
+        </div>
+    </div>
+</div>
+
+@code {
+
+    private UserRegistrationInputModel _user;
+
+    private List<UserOutputModel> _users;
+
+    private UserClient _userClient;
+
+    public Registration()
+    {
+        _userClient = new UserClient();
+    }
+
+    protected override void OnInitialized()
+    {
+        _users = _userClient.GetAllUsers().ToList();
+
+        _user = new UserRegistrationInputModel();
+    }
+
+    public void AddUser()
+    {
+        _users.Add(_userClient.RegisterClient(_user));
+
+        navManager.NavigateTo("./");
+    }
+
+    public void GoHome()
+    {
+        navManager.NavigateTo("./");
+    }
+}

@@ -20,5 +20,16 @@ namespace AppliancesShop.DAL
                 return context.Products.Where(ProductDto=>ProductDto.Type.Id== productTypeId).ToList();
             }
         }
+
+        public ProductDto AddProduct(ProductDto product)
+        {
+            Context context = SingletoneStorage.GetStorage().Context;
+            {
+                context.Products.Add(product);
+                context.SaveChanges();
+            }
+            return product;
+        }
+
     }
 }

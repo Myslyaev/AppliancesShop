@@ -1,0 +1,64 @@
+﻿@using AppliancesShop.BLL.Models.InputModels
+@using System.Security.Claims
+@using AppliancesShop.BLL.Models.OutputModels
+@using Microsoft.AspNetCore.Authentication
+@using Microsoft.AspNetCore.Authentication.Cookies
+@inject NavigationManager navManager
+
+<EditForm Model="loginModel" OnSubmit="StartLogin" FormName="Login">
+	<div>
+		<p><InputText @bind-Value="loginModel.Mail"></InputText></p>
+		<p><InputText @bind-Value="loginModel.Password"></InputText></p>
+		<p><button type="submit">Войти</button></p>
+		<p></p>
+		<p><a href="./registration">Зарегистрироваться</a></p>
+	</div>
+</EditForm>
+
+@code {
+	[SupplyParameterFromForm]
+	public UserAutenthicationInputModel loginModel { get; set; } = new UserAutenthicationInputModel();
+
+	[CascadingParameter]
+	public HttpContext httpContext { get; set; }
+
+	private UserAutenthicationInputModel _user;
+
+	private UserClient _userClient;
+
+	public Login()
+	{
+		_userClient = new UserClient();
+	}
+
+	public async Task StartLogin()
+	{
+		_user = _userClient.GetUserByMail(loginModel.Mail);
+
+		if (_user.Password == loginModel.Password)
+		{
+			var claims = new List<Claim>()
+			{
+				new Claim("Mail", loginModel.Mail),
+				new Claim(ClaimTypes.Role, "Client")
+			};
+
+			var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+			var pr = new ClaimsPrincipal(identity);
+
+			await httpContext.SignInAsync(pr);
+
+			navManager.NavigateTo("./");
+		}
+
+		if (_user == null)
+		{
+			navManager.NavigateTo("./loginfailed");
+		}
+
+		else
+		{
+			navManager.NavigateTo("./loginfailed");
+		}
+	}
+}
