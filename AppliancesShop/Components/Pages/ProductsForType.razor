@@ -31,7 +31,6 @@
     }
 }
 
-================================================================================================================================
 
 <table class="table">
 	<thead>
@@ -40,7 +39,7 @@
 		<th>Товар</th>
 		<th>Цена</th>
 		<th>Картинка</th>
-		<th></th>
+		<th><h3>@j</h3></th>
 	</tr>
 	</thead>
 	<tbody>
@@ -108,17 +107,16 @@
 	</tbody>
 </table>
 
-<h3>@j</h3>
+
 @code
 {
-	private string j = "В корзину";
+	private string j = "Добавь";
 
 	public void Add(string a)
 	{
 		j = "В корзине";
 		StateHasChanged();
 	}
-	
 }
 
 
@@ -129,3 +127,55 @@
 	</form>
 </div>*@
 
+@*<p role="status">Current count: @currentCount</p>
+
+<button class="btn btn-error" @onclick="IncrementCount">Click me</button>
+
+@code {
+	private int currentCount = 0;
+
+	private void IncrementCount()
+	{
+		currentCount++;
+	}
+}*@
+
+@*<button class="btn btn-primary"  @onclick="ToggleModal">Холодильник</button>
+
+<div class="@modalClass" tabindex="-1" style="display: @displayMode;" >
+	<div class="modal-dialog" >
+		<div class="modal-content" >
+			<div class="modal-header" >
+				<h5 class="modal-title" >Modal title</h5>
+				<button class="close" @onclick="ToggleModal" aria-label="Close" >
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				@ChildContent
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-secondary"  @onclick="ToggleModal">Close</button>
+				<button class="btn btn-primary">Save changes</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+@code {
+
+	bool open = false;
+	string modalClass => open ? "modal fade show" : "modal fade";
+	string displayMode => open ? "block" : "none";
+
+
+	private void ToggleModal()
+	{
+		open = !open;       
+		StateHasChanged();
+	}
+
+	[Parameter]
+	public RenderFragment ChildContent { get; set; }
+}*@
