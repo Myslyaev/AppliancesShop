@@ -7,13 +7,14 @@ namespace AppliancesShop.DAL
 {
 	public class ProductTypeRepository : IProductTypeRepository
 	{
-		public void AddProductType(ProductTypeDto productType)
+		public ProductTypeDto AddProductType(ProductTypeDto productType)
 		{
-			//Context context = SingletoneStorage.GetStorage().Context;
-			//{
-			//	context.ProductTypes.Add(new ProductTypeDto() { productType.Name, productType.Img });
-			//	context.SaveChanges();
-			//}
+			Context context = SingletoneStorage.GetStorage().Context;
+			{
+				context.ProductTypes.Add(productType);
+				context.SaveChanges();
+			}
+			return productType;
 		}
 
 		public List<ProductTypeDto> GetAllProductTypes()

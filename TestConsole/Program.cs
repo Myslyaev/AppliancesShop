@@ -217,9 +217,19 @@ Context context = SingletoneStorage.GetStorage().Context;
 //});
 //context.SaveChanges();
 
-//ProductTypeRepository productTypeRepository = new();
+var a=context.Users.ToList();
+
+Console.WriteLine();
+
+ProductTypeRepository productTypeRepository = new();
 
 //var productTypes = productTypeRepository.GetAllProductTypes();
+
+//Console.WriteLine();
+
+ProductRepository productRepository = new();
+
+//var products = productRepository.GetProductsByProductTypeId(2);
 
 //Console.WriteLine();
 
@@ -241,7 +251,21 @@ ProductClient productClient = new();
 
 //var products = productClient.GetAllProducts();
 
-var products = productClient.GetProductsByProductTypeId(1);
+//var products = productClient.GetProductsByProductTypeId(1);
 
+
+Console.WriteLine();
+
+UserClient userClient = new();
+
+//var users = userClient.GetAllUsers();
+
+//var products = productClient.GetProductsByProductTypeId(1);
+
+AvailabilityClient availabilityClient = new();
+
+//var availability = availabilityClient.GetAllAvailability();
+
+//var c = availabilityClient.GetAvailabilityByProductId(1);
 
 Console.WriteLine();

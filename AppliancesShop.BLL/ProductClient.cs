@@ -1,4 +1,5 @@
 ﻿using AppliancesShop.BLL.Mapping;
+using AppliancesShop.BLL.Models.InputModels;
 using AppliancesShop.BLL.Models.OutputModels;
 using AppliancesShop.DAL;
 using AppliancesShop.DAL.Dtos;
@@ -33,6 +34,13 @@ namespace AppliancesShop.BLL
         {
             List<ProductDto> productDtos = _productRepository.GetProductsByProductTypeId(productTypeId);
             return _mapper.Map<List<ProductOutputModel>>(productDtos);
+        }
+
+        public ProductOutputModel AddProduct(ProductInputModel product)
+        {
+            ProductDto productDtos = _productRepository.AddProduct(_mapper.Map<ProductDto>(product));
+            ProductOutputModel productOutput = _mapper.Map<ProductOutputModel>(productDtos);
+            return productOutput;
         }
     }
 }

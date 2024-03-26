@@ -1,6 +1,7 @@
-﻿@page "/"
+﻿@page "/registrationfailed"
 @using Microsoft.AspNetCore.Components.Authorization
 @using System.Security.Claims
+@rendermode InteractiveServer
 
 
 <AuthorizeView Roles="Client">
@@ -13,11 +14,8 @@
 
 <AuthorizeView>
     <NotAuthorized>
-        <h2>Вход в личный кабинет</h2>
-        <Login></Login>
+        <h1>Регистрация</h1>
+        <p>Ошибка! Такая почта уже используется. Попробуйте еще раз.</p>
+        <Registration></Registration>
     </NotAuthorized>
 </AuthorizeView>
-
-@code {
-   
-}
