@@ -262,5 +262,10 @@ UserClient userClient = new();
 
 //var products = productClient.GetProductsByProductTypeId(1);
 
+AvailabilityClient availabilityClient = new();
+
+//var availability = availabilityClient.GetAllAvailability();
+
+//var c = availabilityClient.GetAvailabilityByProductId(1);
 
 Console.WriteLine();
