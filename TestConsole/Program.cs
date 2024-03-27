@@ -1,7 +1,8 @@
-﻿using AppliancesShop.BLL;
+﻿using AppliancesShop.BLL.Clients;
 using AppliancesShop.BLL.Models.OutputModels;
 using AppliancesShop.DAL;
 using AppliancesShop.DAL.Dtos;
+using AppliancesShop.DAL.Repositories;
 
 Context context = SingletoneStorage.GetStorage().Context;
 

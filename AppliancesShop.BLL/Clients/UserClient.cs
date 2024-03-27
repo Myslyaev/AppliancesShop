@@ -1,13 +1,13 @@
 ﻿using AppliancesShop.BLL.Mapping;
 using AppliancesShop.BLL.Models.InputModels;
 using AppliancesShop.BLL.Models.OutputModels;
-using AppliancesShop.DAL;
 using AppliancesShop.DAL.Dtos;
 using AppliancesShop.DAL.Enums;
 using AppliancesShop.DAL.IRepositories;
+using AppliancesShop.DAL.Repositories;
 using AutoMapper;
 
-namespace AppliancesShop.BLL
+namespace AppliancesShop.BLL.Clients
 {
     public class UserClient
     {
@@ -24,7 +24,7 @@ namespace AppliancesShop.BLL
             _mapper = new Mapper(config);
         }
 
-       
+
         public UserOutputModel RegisterClient(UserRegistrationInputModel client)
         {
             UserDto userDtoInput = _mapper.Map<UserDto>(client);
@@ -39,7 +39,7 @@ namespace AppliancesShop.BLL
         {
             List<UserDto> userDtos = _userRepository.GetAllUsers();
 
-            return _mapper.Map<List<UserOutputModel>>(userDtos); 
+            return _mapper.Map<List<UserOutputModel>>(userDtos);
         }
 
         public UserOutputModel GetUserById(int id)

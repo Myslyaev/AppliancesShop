@@ -12,6 +12,10 @@ namespace AppliancesShop.BLL.Mapping
 			CreateMap<PositionDto, PositionInputModel>();
 
 			CreateMap<PositionDto, PositionOutputModel>();
+
+			CreateMap<PositionInputModel, PositionDto>();
+
+			CreateMap<PositionOutputModel, PositionDto>();
 		}
 	}
 }
