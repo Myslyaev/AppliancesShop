@@ -217,7 +217,7 @@ Context context = SingletoneStorage.GetStorage().Context;
 //});
 //context.SaveChanges();
 
-var a=context.Users.ToList();
+//var a=context.Users.ToList();
 
 Console.WriteLine();
 

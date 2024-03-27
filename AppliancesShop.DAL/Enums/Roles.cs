@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace AppliancesShop.DAL.Dtos
+namespace AppliancesShop.DAL.Enums
 {
-	public enum Roles
-	{
+    public enum Roles
+    {
         [Display(Name = "Менеджер")]
         Manager = 0,
 
@@ -12,5 +12,5 @@ namespace AppliancesShop.DAL.Dtos
 
         [Display(Name = "Клиент")]
         Client = 2
-	}
+    }
 }

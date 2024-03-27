@@ -3,6 +3,22 @@
 @using System.Security.Claims
 @rendermode InteractiveServer
 
+<AuthorizeView Roles="Admin">
+    <Authorized>
+        <p>Вы авторизованы как администратор.</p>
+        <p></p>
+        <p><a href="./logout">Выйти</a></p>
+    </Authorized>
+</AuthorizeView>
+
+<AuthorizeView Roles="Manager">
+    <Authorized>
+        <p>Вы авторизованы как менеджер.</p>
+        <p></p>
+        <p><a href="./logout">Выйти</a></p>
+    </Authorized>
+</AuthorizeView>
+
 <AuthorizeView Roles="Client">
     <Authorized>
         <p>Вы авторизованы как клиент.</p>
@@ -13,7 +29,7 @@
 
 <AuthorizeView>
     <NotAuthorized>
-        <h1>Вход в личный кабинет.</h1>
+        <h1>Вход в личный кабинет</h1>
         <p>Ошибка! Неправильный логин или пароль. Попробуйте еще раз.</p>
         <Login></Login>
     </NotAuthorized>

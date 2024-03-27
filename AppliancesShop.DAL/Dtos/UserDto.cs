@@ -1,6 +1,8 @@
-﻿namespace AppliancesShop.DAL.Dtos
+﻿using AppliancesShop.DAL.Enums;
+
+namespace AppliancesShop.DAL.Dtos
 {
-	public class UserDto
+    public class UserDto
 	{
 		public int? Id { get; set; }
 
