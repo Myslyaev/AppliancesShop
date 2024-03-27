@@ -42,5 +42,12 @@ namespace AppliancesShop.BLL
             ProductOutputModel productOutput = _mapper.Map<ProductOutputModel>(productDtos);
             return productOutput;
         }
-    }
+
+		public ProductOutputModel GetProductById(int id)
+		{
+			ProductDto productDtos = _productRepository.GetProductById(id);
+			return _mapper.Map<ProductOutputModel>(productDtos);
+		}
+
+	}
 }

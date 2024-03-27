@@ -1,28 +1,59 @@
 ﻿@inherits LayoutComponentBase
+@using AppliancesShop.Components.Pages.Login
+@using Microsoft.AspNetCore.Components.Authorization
+@using System.Security.Claims
 
 <div class="page">
-    <div class="sidebar">
-        <NavMenu/>
-    </div>
+	<AuthorizeView Roles="Admin">
+		<Authorized>
+			<div class="sidebar">
+				<NavMenu />
+			</div>
+		</Authorized>
+	</AuthorizeView>
 
-    <main>
-        <div class="top-row px-4">
-            <div class="d-flex flex-row-reverse">
-                <form action="http://localhost:5182/basket/1">
-                    <button type="submit">Корзина</button>
-                </form>
-            </div>
-            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
-        </div>
+	<AuthorizeView Roles="Manager">
+		<Authorized>
+			<div class="sidebar">
+				<ManagerMenu />
+			</div>
+		</Authorized>
+	</AuthorizeView>
 
-        <article class="content px-4">
-            @Body
-        </article>
-    </main>
+	<AuthorizeView Roles="Client">
+		<Authorized>
+			<div class="sidebar">
+				<NavMenu />
+			</div>
+		</Authorized>
+	</AuthorizeView>
+
+	<AuthorizeView>
+		<NotAuthorized>
+			<div class="sidebar">
+				<NavMenu />
+			</div>
+		</NotAuthorized>
+	</AuthorizeView>
+
+	<main>
+		<div class="top-row px-4">
+			<div class="d-flex flex-row-reverse">
+				<form action="http://localhost:5182/basket/1">
+					<button type="submit">Корзина</button>
+				</form>
+			</div>
+			<a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
+		</div>
+
+		<article class="content px-4">
+			@Body
+		</article>
+	</main>
 </div>
 
 <div id="blazor-error-ui">
-    An unhandled error has occurred.
-    <a href="" class="reload">Reload</a>
-    <a class="dismiss">🗙</a>
+	An unhandled error has occurred.
+	<a href="" class="reload">Reload</a>
+	<a class="dismiss">🗙</a>
 </div>

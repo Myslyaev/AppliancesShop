@@ -253,6 +253,8 @@ ProductClient productClient = new();
 
 //var products = productClient.GetProductsByProductTypeId(1);
 
+//var product = productClient.GetProductById(6);
+
 
 Console.WriteLine();
 
