@@ -1,0 +1,80 @@
+@using AppliancesShop.BLL.Models.OutputModels
+
+
+@*<a href="./productsfortype/@product.Id">*@
+    
+        	<td>
+        			<div>@product.Name</div>
+        	</td>
+        		<td>
+        			<div>  @product.Price руб</div>
+        		</td>
+        			
+        			<td>
+        				<p><a class='link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover' @onclick="ToggleModal">Посмотреть</a></p>
+                        
+        				<div class="@modalClass " tabindex="-1" style="display: @displayMode;">
+        					<div class="modal-dialog">
+        						<div class="modal-content">
+        							<div class="modal-header">
+								        <h5 class="modal-title">@product.Name</h5>
+								        <button class="close" @onclick="ToggleModal" aria-label="Close" >
+                                        		<span aria-hidden="true">&times;</span>
+                                        </button>
+        							</div>
+        							<div class="modal-body">
+        								<p><img src="@product.Img"></p>
+        							</div>
+        							<div class="modal-content">
+        								<h5 class="modal-title">@product.Price руб.</h5>
+        							</div>
+        							<div class="modal-content">
+        								<h5 class="modal-title">@product.Description</h5>
+        							</div>
+        							<div class="modal-footer">
+        								<button class="btn btn-secondary" @onclick="ToggleModal">Close</button>
+        							</div>
+        						</div>
+        					</div>
+        				</div>
+        			</td>
+                        
+        			@code {
+                        
+        				bool open = false;
+        				string modalClass => open ? "modal fade show" : "modal fade";
+        				string displayMode => open ? "block" : "none";
+                        
+                        
+        				private void ToggleModal()
+        				{
+        					open = !open;
+        					StateHasChanged();
+        				}
+                        
+        				[Parameter]
+        				public RenderFragment ChildContent { get; set; }
+                        
+        			}
+        			<td>
+        				<AddInBasket Step="Добавить в корзину" Action="Add"></AddInBasket>
+        			</td>
+   
+@*</a>*@
+
+@code {
+    [Parameter]
+    public ProductOutputModel product { get; set; }
+
+}
+
+@code
+{
+	private string j = "Добавь в корзину)";
+
+	public void Add(string a)
+	{
+		j = "В корзине";
+		StateHasChanged();
+	}
+}
