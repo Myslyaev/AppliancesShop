@@ -1,10 +1,10 @@
-﻿@page "/"
+﻿@page "/admin/homeadmin"
 @using Microsoft.AspNetCore.Components.Authorization
 @using System.Security.Claims
 
-<AuthorizeView Roles="Client">
+<AuthorizeView Roles="Admin">
     <Authorized>
-        <p>Вы авторизованы как клиент.</p>
+        <p>Вы авторизованы как администратор.</p>
         <p></p>
         <p><a href="./logout">Выйти</a></p>
     </Authorized>
@@ -12,11 +12,11 @@
 
 <AuthorizeView>
     <NotAuthorized>
-        <h2>Вход в личный кабинет</h2>
-        <Login></Login>
+        <h2>Вход в личный кабинет администратора.</h2>
+        <LoginAdmin></LoginAdmin>
     </NotAuthorized>
 </AuthorizeView>
 
 @code {
-   
+
 }

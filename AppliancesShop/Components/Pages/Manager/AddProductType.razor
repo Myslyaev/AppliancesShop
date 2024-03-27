@@ -45,5 +45,7 @@
     public void AddNewProductType()
     {
         _productTypes.Add(_productTypeClient.AddProductType(_productType));
+
+        navManager.NavigateTo("./addproductcomplete");
     }
 }

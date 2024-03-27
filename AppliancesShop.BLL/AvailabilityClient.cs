@@ -33,5 +33,11 @@ namespace AppliancesShop.BLL
 			List<AvailabilityDto> availabilityDtos = _availabilityRepository.GetAvailabilityByProductId(productId);
 			return _mapper.Map<List<AvailabilityOutputModel>>(availabilityDtos);
 		}
+
+		public List<AvailabilityOutputModel> GetAvailabilityByShopId(int shopId)
+		{
+			List<AvailabilityDto> availabilityDtos = _availabilityRepository.GetAvailabilityByShopId(shopId);
+			return _mapper.Map<List<AvailabilityOutputModel>>(availabilityDtos);
+		}
 	}
 }

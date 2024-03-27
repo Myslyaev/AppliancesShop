@@ -28,20 +28,18 @@
 
 	private List<UserOutputModel> _users;
 
-	public Login()
+	public LoginAdmin()
 	{
 		_userClient = new UserClient();
 	}
 
-	// protected override void OnInitialized()
-	// {
-	// 	_users = _userClient.GetAllUsers().ToList();
-	// }
+	protected override void OnInitialized()
+	{
+		_users = _userClient.GetAllUsers().ToList();
+	}
 
 	public async Task StartLogin()
 	{
-		_users = _userClient.GetAllUsers().ToList();
-
 		foreach (UserOutputModel i in _users)
 		{
 			if (i.Mail == loginModel.Mail && i.Password == loginModel.Password)
@@ -49,7 +47,7 @@
 				var claims = new List<Claim>()
 				{
 					new Claim("Mail", loginModel.Mail),
-					new Claim(ClaimTypes.Role, "Client")
+					new Claim(ClaimTypes.Role, "Admin")
 				};
 
 				var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
@@ -57,12 +55,12 @@
 
 				await httpContext.SignInAsync(pr);
 
-				navManager.NavigateTo("./");
+				navManager.NavigateTo("./admin/homeadmin");
 			}
 
 			else
 			{
-				navManager.NavigateTo("./loginfailed");
+				navManager.NavigateTo("./admin/loginfailed");
 			}
 		}
 	}

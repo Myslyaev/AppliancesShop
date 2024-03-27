@@ -12,5 +12,7 @@ namespace AppliancesShop.DAL.IRepositories
 		public List<AvailabilityDto> GetAllAvailability();
 
 		public List<AvailabilityDto> GetAvailabilityByProductId(int productId);
+
+		public List<AvailabilityDto> GetAvailabilityByShopId(int shopId);
 	}
 }

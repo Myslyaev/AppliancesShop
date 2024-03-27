@@ -8,10 +8,14 @@
 <div>
     <form>
         <h2>Добавить товар:</h2>
-        @* <div class="conteiner-for-text">
-            <label class="text">Категория товара:</label>
-            <input @bind=_product.Type class="field" type="text" placeholder="Введите категорию товара">
-        </div> *@
+  
+        <select class="form-select" aria-label="Выбрать категорию товара">
+            @foreach (var productType in _productTypes)
+            {
+                <option value="@productType.Id">@productType.Name</option>
+            }
+        </select>
+
         <div class="conteiner-for-text">
             <label class="text">Название товара:</label>
             <input @bind=_product.Name class="field" type="text" placeholder="Введите название товара">
@@ -40,11 +44,17 @@
 
     private List<ProductOutputModel> _products;
 
+    private List<ProductTypeOutputModel> _productTypes;
+
     private ProductClient _productClient;
+
+    private ProductTypeClient _productTypeClient;
 
     public AddProduct()
     {
         _productClient = new ProductClient();
+
+        _productTypeClient = new ProductTypeClient();
     }
 
     protected override void OnInitialized()
@@ -52,11 +62,15 @@
         _products = _productClient.GetAllProducts().ToList();
 
         _product = new ProductInputModel();
+
+        _productTypes = _productTypeClient.GetAllProductTypes().ToList();
     }
 
     public void AddNewProduct()
     {
         _products.Add(_productClient.AddProduct(_product));
+
+        navManager.NavigateTo("./addproductcomplete");
     }
 }
 

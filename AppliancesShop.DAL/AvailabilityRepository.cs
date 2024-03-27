@@ -1,10 +1,5 @@
 ﻿using AppliancesShop.DAL.Dtos;
 using AppliancesShop.DAL.IRepositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AppliancesShop.DAL
 {
@@ -23,6 +18,14 @@ namespace AppliancesShop.DAL
 			Context context = SingletoneStorage.GetStorage().Context;
 			{
 				return context.Availability.Where(ProductDto => ProductDto.Product.Id == productId).ToList();
+			}
+		}
+
+		public List<AvailabilityDto> GetAvailabilityByShopId(int shopId)
+		{
+			Context context = SingletoneStorage.GetStorage().Context;
+			{
+				return context.Availability.Where(ShopDto => ShopDto.Shop.Id == shopId).ToList();
 			}
 		}
 	}

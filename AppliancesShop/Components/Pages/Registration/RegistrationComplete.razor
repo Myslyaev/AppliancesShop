@@ -1,4 +1,4 @@
-﻿@page "/"
+﻿@page "/registrationcomplete"
 @using Microsoft.AspNetCore.Components.Authorization
 @using System.Security.Claims
 
@@ -12,7 +12,8 @@
 
 <AuthorizeView>
     <NotAuthorized>
-        <h2>Вход в личный кабинет</h2>
+        <h2>Вы успешно зарегистрировались</h2>
+        <p>Войти в личный кабинет</p>
         <Login></Login>
     </NotAuthorized>
 </AuthorizeView>
