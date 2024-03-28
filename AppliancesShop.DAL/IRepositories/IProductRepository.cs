@@ -10,6 +10,8 @@ namespace AppliancesShop.DAL.IRepositories
 
 		public ProductDto GetProductById(int id);
 
+		public List<ProductDto> GetProductAvailabilityByProductId(int productId);
+
 		public ProductDto AddProduct(ProductDto product);
     }
 }

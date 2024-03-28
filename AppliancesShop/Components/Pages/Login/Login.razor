@@ -24,8 +24,6 @@
 
 	private UserClient _userClient;
 
-	private List<UserOutputModel> _users;
-
 	private bool _isAuthenticated = false;
 
 	public Login()
@@ -35,11 +33,9 @@
 
 	public async Task StartLogin()
 	{
-		_users = _userClient.GetAllUsers().ToList();
-
-		foreach (UserOutputModel i in _users)
-		{
-			if (i.Mail == loginModel.Mail && i.Password == loginModel.Password && i.Role == Roles.Admin)
+		_user = _userClient.GetUserByMail(loginModel.Mail);
+		
+		if (_user.Password == loginModel.Password && _user.Role == Roles.Admin)
 			{
 				var claims = new List<Claim>()
 				{
@@ -55,7 +51,7 @@
 				_isAuthenticated = true;
 			}
 
-			if (i.Mail == loginModel.Mail && i.Password == loginModel.Password && i.Role == Roles.Manager)
+		if (_user.Password == loginModel.Password && _user.Role == Roles.Manager)
 			{
 				var claims = new List<Claim>()
 				{
@@ -71,7 +67,7 @@
 				_isAuthenticated = true;
 			}
 
-			if (i.Mail == loginModel.Mail && i.Password == loginModel.Password && i.Role == Roles.Client)
+		if (_user.Password == loginModel.Password && _user.Role == Roles.Client)
 			{
 				var claims = new List<Claim>()
 				{
@@ -86,7 +82,7 @@
 
 				_isAuthenticated = true;
 			}
-		}
+		
 
 		if (_isAuthenticated)
 		{

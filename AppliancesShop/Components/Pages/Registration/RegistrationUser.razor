@@ -50,9 +50,9 @@
 
     protected override void OnInitialized()
     {
-        _users = _userClient.GetAllUsers().ToList();
-
         _user = new UserRegistrationInputModel();
+
+        _users = _userClient.GetAllUsers().ToList();
     }
 
     public void AddUser()
@@ -71,7 +71,6 @@
                 navManager.NavigateTo("./registrationcomplete");
             }
         }
-
     }
 
     public void GoHome()

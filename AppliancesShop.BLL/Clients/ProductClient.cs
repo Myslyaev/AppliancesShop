@@ -20,7 +20,9 @@ namespace AppliancesShop.BLL.Clients
             {
                 cfg.AddProfile(new ProductMappingProfile());
                 cfg.AddProfile(new ProductTypeMappingProfile());
-            });
+				cfg.AddProfile(new AvailabilityMappingProfile());
+				cfg.AddProfile(new ShopMappingProfile());
+			});
             _mapper = new Mapper(config);
         }
 
@@ -49,5 +51,10 @@ namespace AppliancesShop.BLL.Clients
             return _mapper.Map<ProductOutputModel>(productDtos);
         }
 
-    }
+		public List<ProductOutputModel> GetProductAvailabilityByProductId(int productId)
+		{
+			List<ProductDto> productDtos = _productRepository.GetProductAvailabilityByProductId(productId);
+			return _mapper.Map<List<ProductOutputModel>>(productDtos);
+		}
+	}
 }

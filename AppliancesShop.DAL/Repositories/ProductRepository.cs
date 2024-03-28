@@ -1,5 +1,6 @@
 ﻿using AppliancesShop.DAL.Dtos;
 using AppliancesShop.DAL.IRepositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace AppliancesShop.DAL.Repositories
 {
@@ -37,6 +38,16 @@ namespace AppliancesShop.DAL.Repositories
             {
                 return context.Products.Where(ProductDto => ProductDto.Id == id).Single();
             }
+        }
+
+        public List<ProductDto> GetProductAvailabilityByProductId(int productId)
+        {
+            Context context = SingletoneStorage.GetStorage().Context;
+            {
+                return context.Products.Where(ProductDto => ProductDto.Id == productId).Include(ProductDto => ProductDto.Availability)
+                    .ThenInclude(AvailabilityDto => AvailabilityDto.Shop).ToList();
+            }
+
         }
     }
 }

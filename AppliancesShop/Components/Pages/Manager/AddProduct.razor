@@ -6,14 +6,18 @@
 <div>
     <form>
         <h2>Добавить товар:</h2>
-  
-        <select class="form-select" aria-label="Выбрать категорию товара">
+        
+        @* <select class="form-select" aria-label="Выбрать категорию товара" @bind=_product.Type.Id>
             @foreach (var productType in _productTypes)
             {
                 <option value="@productType.Id">@productType.Name</option>
             }
-        </select>
-
+        </select> *@
+        <div class="conteiner-for-text">
+            <label class="text">Категория товара:</label>
+            <input @bind=_product.Type.Id class="field" type="text" placeholder="Введите название товара">
+        </div>
+        
         <div class="conteiner-for-text">
             <label class="text">Название товара:</label>
             <input @bind=_product.Name class="field" type="text" placeholder="Введите название товара">
