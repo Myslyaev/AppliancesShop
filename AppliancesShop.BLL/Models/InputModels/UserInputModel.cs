@@ -1,8 +1,9 @@
 ﻿using AppliancesShop.BLL.Models.OutputModels;
+using AppliancesShop.DAL.Enums;
 
 namespace AppliancesShop.BLL.Models.InputModels
 {
-	public class UserInputModel
+    public class UserInputModel
 	{
 		public string? Name { get; set; }
 
@@ -10,7 +11,7 @@ namespace AppliancesShop.BLL.Models.InputModels
 
 		public string? PhoneNumber { get; set; }
 
-		public Constants? Role { get; set; }
+		public Roles? Role { get; set; }
 
 		public string Mail { get; set; }
 

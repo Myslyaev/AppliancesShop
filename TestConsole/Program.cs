@@ -1,9 +1,13 @@
-﻿using AppliancesShop.BLL;
+﻿using AppliancesShop.BLL.Clients;
 using AppliancesShop.BLL.Models.OutputModels;
 using AppliancesShop.DAL;
 using AppliancesShop.DAL.Dtos;
+using AppliancesShop.DAL.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 Context context = SingletoneStorage.GetStorage().Context;
+
+
 
 //context.Shops.Add(new ShopDto()
 //{
@@ -217,7 +221,7 @@ Context context = SingletoneStorage.GetStorage().Context;
 //});
 //context.SaveChanges();
 
-var a=context.Users.ToList();
+//var a=context.Users.ToList();
 
 Console.WriteLine();
 
@@ -225,13 +229,31 @@ ProductTypeRepository productTypeRepository = new();
 
 //var productTypes = productTypeRepository.GetAllProductTypes();
 
+
 //Console.WriteLine();
 
 ProductRepository productRepository = new();
 
 //var products = productRepository.GetProductsByProductTypeId(2);
+//var products = productRepository.GetProductAvailabilityByProductId(3);
 
-//Console.WriteLine();
+//foreach (var i in products)
+//{
+//	Console.WriteLine(i.Name);
+
+//	foreach (var a in i.Availability)
+//	{
+//		Console.WriteLine(a.Quantity);
+
+//		foreach (var b in i.Availability)
+//		{
+//			Console.WriteLine(b.Shop.Name);
+//			Console.WriteLine(b.Shop.Adress);
+//		}
+//	}
+//}
+
+Console.WriteLine();
 
 
 ProductTypeClient productTypeClient = new();
@@ -252,6 +274,10 @@ ProductClient productClient = new();
 //var products = productClient.GetAllProducts();
 
 //var products = productClient.GetProductsByProductTypeId(1);
+
+//var product = productClient.GetProductAvailabilityByProductId(3);
+
+
 
 
 Console.WriteLine();

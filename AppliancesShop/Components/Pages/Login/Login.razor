@@ -1,0 +1,97 @@
+﻿@using System.Security.Claims
+@using Microsoft.AspNetCore.Authentication
+@using Microsoft.AspNetCore.Authentication.Cookies
+@inject NavigationManager navManager
+
+<EditForm Model="loginModel" OnSubmit="StartLogin" FormName="Login">
+	<div>
+		<p><InputText @bind-Value="loginModel.Mail"></InputText></p>
+		<p><InputText @bind-Value="loginModel.Password"></InputText></p>
+		<p><button type="submit">Войти</button></p>
+		<p></p>
+		<p><a href="./registration">Зарегистрироваться</a></p>
+	</div>
+</EditForm>
+
+@code {
+	[SupplyParameterFromForm]
+	public UserAutenthicationInputModel loginModel { get; set; } = new UserAutenthicationInputModel();
+
+	[CascadingParameter]
+	public HttpContext httpContext { get; set; }
+
+	private UserAutenthicationInputModel _user;
+
+	private UserClient _userClient;
+
+	private bool _isAuthenticated = false;
+
+	public Login()
+	{
+		_userClient = new UserClient();
+	}
+
+	public async Task StartLogin()
+	{
+		_user = _userClient.GetUserByMail(loginModel.Mail);
+		
+		if (_user.Password == loginModel.Password && _user.Role == Roles.Admin)
+			{
+				var claims = new List<Claim>()
+				{
+					new Claim("Mail", loginModel.Mail),
+					new Claim(ClaimTypes.Role, "Admin")
+				};
+
+				var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+				var pr = new ClaimsPrincipal(identity);
+
+				await httpContext.SignInAsync(pr);
+
+				_isAuthenticated = true;
+			}
+
+		if (_user.Password == loginModel.Password && _user.Role == Roles.Manager)
+			{
+				var claims = new List<Claim>()
+				{
+					new Claim("Mail", loginModel.Mail),
+					new Claim(ClaimTypes.Role, "Manager")
+				};
+
+				var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+				var pr = new ClaimsPrincipal(identity);
+
+				await httpContext.SignInAsync(pr);
+
+				_isAuthenticated = true;
+			}
+
+		if (_user.Password == loginModel.Password && _user.Role == Roles.Client)
+			{
+				var claims = new List<Claim>()
+				{
+					new Claim("Mail", loginModel.Mail),
+					new Claim(ClaimTypes.Role, "Client")
+				};
+
+				var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+				var pr = new ClaimsPrincipal(identity);
+
+				await httpContext.SignInAsync(pr);
+
+				_isAuthenticated = true;
+			}
+		
+
+		if (_isAuthenticated)
+		{
+			navManager.NavigateTo("./");
+		}
+
+		else
+		{
+			navManager.NavigateTo("./loginfailed");
+		}
+	}
+}

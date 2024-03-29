@@ -1,6 +1,4 @@
-﻿@using AppliancesShop.BLL.Models.InputModels
-@using AppliancesShop.BLL.Models.OutputModels
-@attribute [StreamRendering]
+﻿@attribute [StreamRendering]
 @rendermode InteractiveServer
 @inject NavigationManager navManager
 
@@ -52,9 +50,9 @@
 
     protected override void OnInitialized()
     {
-        _users = _userClient.GetAllUsers().ToList();
-
         _user = new UserRegistrationInputModel();
+
+        _users = _userClient.GetAllUsers().ToList();
     }
 
     public void AddUser()
@@ -73,7 +71,6 @@
                 navManager.NavigateTo("./registrationcomplete");
             }
         }
-
     }
 
     public void GoHome()

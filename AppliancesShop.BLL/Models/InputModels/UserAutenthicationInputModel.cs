@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AppliancesShop.DAL.Enums;
 
 namespace AppliancesShop.BLL.Models.InputModels
 {
-    public class UserAutenthicationInputModel
-    {
-        public string Mail { get; set; }
+	public class UserAutenthicationInputModel
+	{
+		public string Mail { get; set; }
 
-        public string Password { get; set; }
-    }
+		public string Password { get; set; }
+
+		public Roles? Role { get; set; }
+	}
 }

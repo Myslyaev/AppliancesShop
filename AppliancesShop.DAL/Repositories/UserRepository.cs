@@ -1,7 +1,7 @@
 ﻿using AppliancesShop.DAL.Dtos;
 using AppliancesShop.DAL.IRepositories;
 
-namespace AppliancesShop.DAL
+namespace AppliancesShop.DAL.Repositories
 {
     public class UserRepository : IUserRepository
     {
