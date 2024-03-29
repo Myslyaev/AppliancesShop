@@ -56,11 +56,18 @@
         				public RenderFragment ChildContent { get; set; }
                         
         			}
-        			<td>
-        				<AddInBasket Step="Добавить в корзину" Action="Add"></AddInBasket>
-        			</td>
+			        <td>
+				        <AddInBasket Step="Добавить в корзину" Action="Add"></AddInBasket>
+			        </td>
+			        
+			        <div class="d-flex flex-row-reverse">
+                    
+                    	<form action="http://localhost:5182/basket/@product.Id">
+                    		<button type="submit">Перейти в корзину</button>
+                    	</form>
+                    </div>
    
-@*</a>*@
+			        @*</a>*@
 
 @code {
     [Parameter]
