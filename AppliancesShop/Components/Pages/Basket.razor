@@ -66,7 +66,7 @@
 				</td>
 
 				<td>
-					<p><a class='link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover' @onclick="ToggleModal">Посмотреть</a></p>
+					<p><button class='link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover' @onclick="ToggleModal">Посмотреть</button></p>
 
 					<div class="@modalClass " tabindex="-1" style="display: @displayMode;">
 						<div class="modal-dialog">
@@ -164,7 +164,10 @@
 
 				</td>
 				<td>@i.Name</td>
-				<td>@i.Adress</td>
+			@*-- Т.к. в ссылке используется @ а она нужна для внутренних переменных, необходимо использовать двойную собаку
+			     чтобы её заэкранировать, т.к. в ссылке после /maps/ пишем двойную собаку @@, а там где нам нужны данные
+			     из нашей переменной, мы используем одинарную @i.Adress -->*@
+				<td><a href="https://www.google.com/maps/@@59.9400863,30.3028374,11.03z?entry=ttu&q=@i.Adress">@i.Adress</a></td>
 				<td>12</td>
 
 			</tr>
