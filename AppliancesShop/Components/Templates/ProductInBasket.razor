@@ -1,8 +1,5 @@
 @using AppliancesShop.BLL.Models.OutputModels
 
-
-@*<a href="./productsfortype/@product.Id">*@
-    
         	<td>
         			<div>@product.Name</div>
         	</td>
@@ -56,39 +53,41 @@
         				public RenderFragment ChildContent { get; set; }
                         
         			}
-			        <td>
-				        <AddInBasket Step="@j" Action="Add"></AddInBasket>
-			        </td>
+			       <td>
+                   					<div class="d-flex">
+                   						<button class="btn btn-outline-primary" style="margin-right: 30px;" @onclick="DecrementCount">-</button>
+                   
+                   						<div role="status"> @currentCount</div>
+                   
+                   						<button class="btn btn-outline-primary" style="margin-left: 30px;" @onclick="IncrementCount">+</button>
+                   					</div>
+                   
+                   					@code {
+                   						private int currentCount = 1;
+                   
+                   						private void DecrementCount()
+                   						{
+						                    if (currentCount > 0)
+						                    {
+							                    currentCount--;
+						                    }
+						                    else
+						                    {
+							                    currentCount = 0;
+						                    }
+					                    }
+                   
+                   						private void IncrementCount()
+                   						{
+                   							currentCount++;
+                   						}
+                   					}
+                   
+                   				</td>
 			        
 @code {
     [Parameter]
     public ProductOutputModel product { get; set; }
 
-}
-
-@code
-{
-	private string j = "Добавь в корзину)";
-	private int? aaa = 1;
-	
-	public void Add(string a)
-	{
-		if (
-			j == "Добавь в корзину)")
-		{
-			j = "В корзине";
-
-			aaa = @product.Id;
-			
-			Console.WriteLine(aaa);
-	}
-		else
-		{
-			j = "Добавь в корзину)";
-		}
-		StateHasChanged();
-	}
-
-	
 }
 

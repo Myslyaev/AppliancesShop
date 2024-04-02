@@ -1,6 +1,6 @@
 @page "/basket/{Id:int}"
 @*@page "/productsfortype/{Id:int}"*@
-
+@using AppliancesShop.BLL.Models.OutputModels
 @attribute [StreamRendering]
 @rendermode InteractiveServer
 
@@ -40,14 +40,14 @@
 
 <PageTitle>Корзина</PageTitle>
 
-<h1>Корзина</h1>
+<h2>Корзина</h2>
 <table class="table">
 	<thead>
 	<tr>
-		<th>Торвар</th>
-		<th>Цена</th>
-		<th>Описание</th>
-		<th>Выбрать шт.</th>
+		<th><h4>Торвар</h4></th>
+		<th><h4>Цена</h4></th>
+		<th><h4>Описание</h4></th>
+		<th><h4>Выбрать шт.</h4></th>
 	</tr>
 	
 	</thead>
@@ -58,96 +58,23 @@
 		{
 			<tr>
 
-				<td>
-					<h4>@i.Name</h4>
-				</td>
-				<td>
-					<div>@i.Price руб</div>
-				</td>
-
-				<td>
-					<p><button class='link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover' @onclick="ToggleModal">Посмотреть</button></p>
-
-					<div class="@modalClass " tabindex="-1" style="display: @displayMode;">
-						<div class="modal-dialog">
-							<div class="modal-content">
-								<div class="modal-header">
-									<h3 class="modal-title">@i.Name</h3>
-								</div>
-								<div class="modal-body">
-									<p><img src="@i.Img"></p>
-								</div>
-								<div class="modal-content">
-									<h5 class="modal-title">@i.Price руб.</h5>
-								</div>
-								<div class="modal-content">
-									<h5 class="modal-title">@i.Description</h5>
-								</div>
-								<div class="modal-footer">
-									<button class="btn btn-secondary" @onclick="ToggleModal">Close</button>
-								</div>
-							</div>
-						</div>
-					</div>
-				</td>
-
-				@code {
-                        
-        				bool open = false;
-        				string modalClass => open ? "modal fade show" : "modal fade";
-        				string displayMode => open ? "block" : "none";
-                        
-                        
-        				private void ToggleModal()
-        				{
-        					open = !open;
-        					StateHasChanged();
-        				}
-                        
-        				[Parameter]
-        				public RenderFragment ChildContent { get; set; }
-                        
-        			}
+				<ProductInBasket product=i></ProductInBasket>
 				
-				<td>
-					<div class="d-flex">
-						<button class="btn btn-outline-primary" style="margin-right: 30px;" @onclick="IncrementCount1">-</button>
-
-						<div role="status"> @currentCount1</div>
-
-						<button class="btn btn-outline-primary" style="margin-left: 30px;" @onclick="IncrementCount2">+</button>
-					</div>
-
-					@code {
-						private int currentCount1 = 1;
-
-						private void IncrementCount1()
-						{
-							currentCount1--;
-						}
-
-						private void IncrementCount2()
-						{
-							currentCount1++;
-						}
-					}
-
-				</td>
 			</tr>
 		}
 	</tbody>
 </table>
 ====================================================================================================================================================================
 
-<h1>Где можно забрать</h1>
+<h2>Где можно забрать</h2>
 
 <table class="table">
 	<thead>
 		<tr>
-			<th>Заберу из</th>
-			<th>Магазин</th>
-			<th>Адрес</th>
-			<th>Кол. шт. в магазине</th>
+			<th><h4>Заберу из</h4></th>
+			<th><h4>Магазин</h4></th>
+			<th><h4>Адрес</h4></th>
+			<th><h4>Кол. шт. в магазине</h4></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -168,7 +95,22 @@
 			     чтобы её заэкранировать, т.к. в ссылке после /maps/ пишем двойную собаку @@, а там где нам нужны данные
 			     из нашей переменной, мы используем одинарную @i.Adress -->*@
 				<td><a href="https://www.google.com/maps/@@59.9400863,30.3028374,11.03z?entry=ttu&q=@i.Adress">@i.Adress</a></td>
-				<td>12</td>
+			
+				<td> 
+					     
+						     @foreach (var i in _products)
+						     {
+							     foreach (var a in i.Availability)
+							     {
+								     foreach (var b in i.Availability)
+								     {
+									     @b.Shop.Name;
+								     }
+							     }
+						     }
+					     
+					    
+				     </td>
 
 			</tr>
 		}
