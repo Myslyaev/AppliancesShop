@@ -1,5 +1,6 @@
 ﻿using AppliancesShop.DAL.Dtos;
 using AppliancesShop.DAL.IRepositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace AppliancesShop.DAL.Repositories
 {
@@ -19,5 +20,7 @@ namespace AppliancesShop.DAL.Repositories
 		{
 			throw new NotImplementedException();
 		}
-	}
+
+        
+    }
 }

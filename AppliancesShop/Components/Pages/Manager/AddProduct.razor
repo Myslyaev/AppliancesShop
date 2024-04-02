@@ -4,76 +4,79 @@
 @inject NavigationManager navManager
 
 <div>
-    <form>
-        <h2>Добавить товар:</h2>
-        
-        @* <select class="form-select" aria-label="Выбрать категорию товара" @bind=_product.Type.Id>
-            @foreach (var productType in _productTypes)
-            {
-                <option value="@productType.Id">@productType.Name</option>
-            }
-        </select> *@
-        <div class="conteiner-for-text">
-            <label class="text">Категория товара:</label>
-            <input @bind=_product.Type.Id class="field" type="text" placeholder="Введите название товара">
-        </div>
-        
-        <div class="conteiner-for-text">
-            <label class="text">Название товара:</label>
-            <input @bind=_product.Name class="field" type="text" placeholder="Введите название товара">
-        </div>
-        <div class="conteiner-for-text">
-            <label class="text">Цена товара:</label>
-            <input @bind=_product.Price class="field" type="text" placeholder="Введите цену товара">
-        </div>
-        <div class="conteiner-for-text">
-            <label class="text">Описание товара:</label>
-            <input @bind=_product.Description class="field" type="text" placeholder="Введите описание товара">
-        </div>
-        <div class="conteiner-for-text">
-            <label class="text">Ссылка на изображение:</label>
-            <input @bind=_product.Img class="field" type="text" placeholder="Введите ссылку на изображение">
-        </div>
-    </form>
+	<form>
+		<h2>Добавить товар:</h2>
 
-    <div>
-        <p></p>
-        <button @onclick=AddNewProduct>Добавить</button>
-    </div>
+		<select class="form-select" aria-label="Выбрать категорию товара" @bind=_typeId>
+			@foreach (var productType in _productTypes)
+			{
+				<option value="@productType.Id">@productType.Name</option>
+			}
+		</select>
+		<div class="conteiner-for-text">
+			<label class="text">Название товара:</label>
+			<input @bind=_product.Name class="field" type="text" placeholder="Введите название товара">
+		</div>
+		<div class="conteiner-for-text">
+			<label class="text">Цена товара:</label>
+			<input @bind=_product.Price class="field" type="text" placeholder="Введите цену товара">
+		</div>
+		<div class="conteiner-for-text">
+			<label class="text">Описание товара:</label>
+			<input @bind=_product.Description class="field" type="text" placeholder="Введите описание товара">
+		</div>
+		<div class="conteiner-for-text">
+			<label class="text">Ссылка на изображение:</label>
+			<input @bind=_product.Img class="field" type="text" placeholder="Введите ссылку на изображение">
+		</div>
+	</form>
+
+	<div>
+		<p></p>
+		<button @onclick=AddNewProduct>Добавить</button>
+	</div>
 </div>
 
 @code {
-    private ProductInputModel _product;
+	private int _typeId;
 
-    private List<ProductOutputModel> _products;
+	private ProductInputModel _product;
 
-    private List<ProductTypeOutputModel> _productTypes;
+	private ProductClient _productClient;
 
-    private ProductClient _productClient;
+	private ProductTypeClient _productTypeClient;
 
-    private ProductTypeClient _productTypeClient;
+	private List<ProductOutputModel> _products;
 
-    public AddProduct()
-    {
-        _productClient = new ProductClient();
+	private List<ProductTypeOutputModel> _productTypes;
 
-        _productTypeClient = new ProductTypeClient();
-    }
+	public AddProduct()
+	{
+		_productClient = new ProductClient();
 
-    protected override void OnInitialized()
-    {
-        _products = _productClient.GetAllProducts().ToList();
+		_productTypeClient = new ProductTypeClient();
+	}
 
-        _product = new ProductInputModel();
+	protected override void OnInitialized()
+	{
+		_productTypes = _productTypeClient.GetAllProductTypes().ToList();
 
-        _productTypes = _productTypeClient.GetAllProductTypes().ToList();
-    }
+		_products = _productClient.GetAllProducts().ToList();
 
-    public void AddNewProduct()
-    {
-        _products.Add(_productClient.AddProduct(_product));
+		_product = new ProductInputModel()
+			{
+				Type= new ProductTypeOutputModel()
+				{
+					Id=_typeId
+				}
+			};
+	}
 
-        navManager.NavigateTo("./addproductcomplete");
-    }
+	public void AddNewProduct()
+	{
+		_products.Add(_productClient.AddProduct(_product));
+
+		navManager.NavigateTo("./addproductcomplete");
+	}
 }
 

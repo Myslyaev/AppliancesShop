@@ -223,6 +223,20 @@ Context context = SingletoneStorage.GetStorage().Context;
 
 //var a=context.Users.ToList();
 
+AvailabilityClient availabilityClient = new();
+
+//var c = availabilityClient.GetAvailabilityByShopId(2);
+//var shopId = 2;
+
+//var pId = context.Availability.Include(AvailabilityDto => AvailabilityDto.Product.Id).Where(AvailabilityDto=>AvailabilityDto.Shop.Id==shopId);
+//var b = context.Positions.Where(x => x.Product.Id == pId).ToList();
+
+Console.WriteLine();
+
+//ShopRepository shopRepository = new();
+
+//var shopId = shopRepository.GetShopByMail("a1@a1.ru");
+
 Console.WriteLine();
 
 ProductTypeRepository productTypeRepository = new();
@@ -232,7 +246,29 @@ ProductTypeRepository productTypeRepository = new();
 
 //Console.WriteLine();
 
-ProductRepository productRepository = new();
+//ProductRepository productRepository = new();
+
+//AvailabilityRepository availabilityRepository = new();
+
+//var b = availabilityRepository.GetAllAvailability();
+
+//OrderRepository orderRepository = new();
+
+
+
+//var a = orderRepository.GetAllOrders();
+//var List=new List<AvailabilityDto>();
+//foreach (var order in a)
+//{
+//	var positions = getpositionbyorderbyid(order.Id);
+//	foreach (var position in positions)
+//	{
+//		List.Add(orderRepository.GetRequest2(order, position));
+//	}
+	
+//}
+
+Console.WriteLine();
 
 //var products = productRepository.GetProductsByProductTypeId(2);
 //var products = productRepository.GetProductAvailabilityByProductId(3);
@@ -288,7 +324,7 @@ UserClient userClient = new();
 
 //var products = productClient.GetProductsByProductTypeId(1);
 
-AvailabilityClient availabilityClient = new();
+//AvailabilityClient availabilityClient = new();
 
 //var availability = availabilityClient.GetAllAvailability();
 

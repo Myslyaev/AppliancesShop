@@ -3,78 +3,82 @@
 @inject NavigationManager navManager
 
 <div>
-    <div>
-        <form>
-            <div>
-                <label class="text">Фамилия:</label>
-                <input @bind=_user.Surname class="form-control" type="text" placeholder="Введите фамилию" required>
-            </div>
-            <div>
-                <label class="text">Имя:</label>
-                <input @bind=_user.Name class="form-control" type="name" placeholder="Введите имя" required>
-            </div>
-            <div>
-                <label class="text">Почта:</label>
-                <input @bind=_user.Mail class="form-control" type="email" placeholder="Введите почту" required>
-            </div>
-            <div>
-                <label class="text">Телефон:</label>
-                <input @bind=_user.PhoneNumber class="form-control" type="t" placeholder="Введите телефон" required>
-            </div>
-            <div>
-                <label class="text">Пароль:</label>
-                <input @bind=_user.Password class="form-control" type="password" placeholder="Введите пароль" required>
-            </div>
-        </form>
+	<div>
+		<form>
+			<div>
+				<label class="text">Фамилия:</label>
+				<input @bind=_user.Surname class="form-control" type="text" placeholder="Введите фамилию" required>
+			</div>
+			<div>
+				<label class="text">Имя:</label>
+				<input @bind=_user.Name class="form-control" type="name" placeholder="Введите имя" required>
+			</div>
+			<div>
+				<label class="text">Почта:</label>
+				<input @bind=_user.Mail class="form-control" type="email" placeholder="Введите почту" required>
+			</div>
+			<div>
+				<label class="text">Телефон:</label>
+				<input @bind=_user.PhoneNumber class="form-control" type="t" placeholder="Введите телефон" required>
+			</div>
+			<div>
+				<label class="text">Пароль:</label>
+				<input @bind=_user.Password class="form-control" type="password" placeholder="Введите пароль" required>
+			</div>
+		</form>
 
-        <div>
-            <p></p>
-            <button @onclick=AddUser>Регистрация</button>
-            <button @onclick=GoHome>Отмена</button>
-        </div>
-    </div>
+		<div>
+			<p></p>
+			<button @onclick=AddUser>Регистрация</button>
+			<button @onclick=GoHome>Отмена</button>
+		</div>
+	</div>
 </div>
 
 @code {
+	private UserRegistrationInputModel _user;
 
-    private UserRegistrationInputModel _user;
+	private UserAutenthicationInputModel _checkMail;
 
-    private List<UserOutputModel> _users;
+	private List<UserOutputModel> _users;
 
-    private UserClient _userClient;
+	private UserClient _userClient;
 
-    public RegistrationUser()
-    {
-        _userClient = new UserClient();
-    }
+	public RegistrationUser()
+	{
+		_userClient = new UserClient();
+	}
 
-    protected override void OnInitialized()
-    {
-        _user = new UserRegistrationInputModel();
+	protected override void OnInitialized()
+	{
+		_user = new UserRegistrationInputModel();
 
-        _users = _userClient.GetAllUsers().ToList();
-    }
+		_users = _userClient.GetAllUsers().ToList();
+	}
 
-    public void AddUser()
-    {
-        foreach (UserOutputModel i in _users)
-        {
-            if (i.Mail == _user.Mail)
-            {
-                navManager.NavigateTo("./registrationfailed");
-            }
+	public void AddUser()
+	{
+		_user.Mail = _user.Mail.ToLower();
+		_user.Password = _user.Password.ToLower();
 
-            else
-            {
-                _users.Add(_userClient.RegisterClient(_user));
+		_checkMail = _userClient.GetUserByMail(_user.Mail);
 
-                navManager.NavigateTo("./registrationcomplete");
-            }
-        }
-    }
 
-    public void GoHome()
-    {
-        navManager.NavigateTo("./");
-    }
+		if (_checkMail == null)
+		{
+			_users.Add(_userClient.RegisterClient(_user));
+
+			navManager.NavigateTo("./registrationcomplete");
+		}
+
+		else
+		{
+			navManager.NavigateTo("./registrationfailed");
+		}
+	}
+
+	public void GoHome()
+	{
+		navManager.NavigateTo("./");
+	}
 }

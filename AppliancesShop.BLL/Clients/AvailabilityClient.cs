@@ -1,4 +1,5 @@
 ﻿using AppliancesShop.BLL.Mapping;
+using AppliancesShop.BLL.Models.InputModels;
 using AppliancesShop.BLL.Models.OutputModels;
 using AppliancesShop.DAL.Dtos;
 using AppliancesShop.DAL.IRepositories;
@@ -18,6 +19,8 @@ namespace AppliancesShop.BLL.Clients
             var config = new MapperConfiguration(cfg =>
             {
                 cfg.AddProfile(new AvailabilityMappingProfile());
+                cfg.AddProfile(new ProductMappingProfile());
+                cfg.AddProfile(new ShopMappingProfile());
             });
             _mapper = new Mapper(config);
         }
@@ -39,5 +42,12 @@ namespace AppliancesShop.BLL.Clients
             List<AvailabilityDto> availabilityDtos = _availabilityRepository.GetAvailabilityByShopId(shopId);
             return _mapper.Map<List<AvailabilityOutputModel>>(availabilityDtos);
         }
-    }
+
+		public AvailabilityOutputModel AddAvailability(AvailabilityInputModel availability)
+		{
+			AvailabilityDto availabilityDtos = _availabilityRepository.AddAvailability(_mapper.Map<AvailabilityDto>(availability));
+			AvailabilityOutputModel availabilityOutput = _mapper.Map<AvailabilityOutputModel>(availabilityDtos);
+			return availabilityOutput;
+		}
+	}
 }

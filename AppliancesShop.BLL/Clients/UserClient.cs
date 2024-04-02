@@ -6,6 +6,9 @@ using AppliancesShop.DAL.Enums;
 using AppliancesShop.DAL.IRepositories;
 using AppliancesShop.DAL.Repositories;
 using AutoMapper;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using System.Net.Http;
+using System.Security.Claims;
 
 namespace AppliancesShop.BLL.Clients
 {
@@ -20,10 +23,10 @@ namespace AppliancesShop.BLL.Clients
             var config = new MapperConfiguration(cfg =>
             {
                 cfg.AddProfile(new UserMappingProfile());
+                cfg.AddProfile(new ShopMappingProfile());
             });
             _mapper = new Mapper(config);
         }
-
 
         public UserOutputModel RegisterClient(UserRegistrationInputModel client)
         {
@@ -58,6 +61,62 @@ namespace AppliancesShop.BLL.Clients
             return user;
         }
 
+        public UserOutputModel GetShopByMail(string mail)
+        {
+            UserDto userDto = _userRepository.GetShopByMail(mail);
+            UserOutputModel user = _mapper.Map<UserOutputModel>(userDto);
 
+            return user;
+        }
+
+        public (bool, ClaimsPrincipal) GetClaims (UserAutenthicationInputModel user, string password)
+        {
+            bool isAuthenticated = false;
+            ClaimsPrincipal pr = null;
+
+            if (user.Password == password && user.Role == Roles.Admin)
+            {
+                var claims = new List<Claim>()
+                {
+                    new Claim("Mail", user.Mail),
+                    new Claim(ClaimTypes.Role, "Admin")
+                };
+
+                var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                pr = new ClaimsPrincipal(identity);
+
+                isAuthenticated = true;
+            }
+
+            if (user.Password == password && user.Role == Roles.Manager)
+            {
+                var claims = new List<Claim>()
+                {
+                    new Claim("Mail", user.Mail),
+                    new Claim(ClaimTypes.Role, "Manager")
+                };
+
+                var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                pr = new ClaimsPrincipal(identity);
+
+                isAuthenticated = true;
+            }
+
+            if (user.Password == password && user.Role == Roles.Client)
+            {
+                var claims = new List<Claim>()
+                {
+                    new Claim("Mail", user.Mail),
+                    new Claim(ClaimTypes.Role, "Client")
+                };
+
+                var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                pr = new ClaimsPrincipal(identity);
+
+                isAuthenticated = true;
+            }
+
+            return (isAuthenticated, pr);
+        }
     }
 }

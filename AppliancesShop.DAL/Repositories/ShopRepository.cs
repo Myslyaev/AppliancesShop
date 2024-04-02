@@ -1,5 +1,6 @@
 ﻿using AppliancesShop.DAL.Dtos;
 using AppliancesShop.DAL.IRepositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace AppliancesShop.DAL.Repositories
 {
@@ -10,6 +11,16 @@ namespace AppliancesShop.DAL.Repositories
             Context context = SingletoneStorage.GetStorage().Context;
             {
                 return context.Shops.ToList();
+            }
+        }
+
+        public int? GetShopByMail(string mail)
+        {
+            Context context = SingletoneStorage.GetStorage().Context;
+            {
+                var user= context.Users.Where(u => u.Mail == mail).Include(UserDto=>UserDto.Shop).Single();
+
+                return user.Shop.Id;
             }
         }
     }

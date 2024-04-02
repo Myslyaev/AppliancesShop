@@ -18,5 +18,7 @@ namespace AppliancesShop.DAL.IRepositories
 		public OrderDto GetOrderById(int id);
 
 		public OrderDto AddOrder(OrderDto order);
+
+		public List<OrderDto> GetRequest(List<AvailabilityDto> availability);
 	}
 }

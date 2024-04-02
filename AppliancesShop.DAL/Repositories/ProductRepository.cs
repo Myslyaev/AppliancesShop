@@ -24,12 +24,12 @@ namespace AppliancesShop.DAL.Repositories
 
         public ProductDto AddProduct(ProductDto product)
         {
-            Context context = SingletoneStorage.GetStorage().Context;
-            {
-                context.Products.Add(product);
-                context.SaveChanges();
-            }
-            return product;
+			Context context = SingletoneStorage.GetStorage().Context;
+			{
+				context.Products.Add(product);
+				context.SaveChanges();
+			}
+			return product;
         }
 
         public ProductDto GetProductById(int id)
@@ -47,7 +47,6 @@ namespace AppliancesShop.DAL.Repositories
                 return context.Products.Where(ProductDto => ProductDto.Id == productId).Include(ProductDto => ProductDto.Availability)
                     .ThenInclude(AvailabilityDto => AvailabilityDto.Shop).ToList();
             }
-
         }
     }
 }

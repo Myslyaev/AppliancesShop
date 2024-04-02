@@ -16,5 +16,7 @@ namespace AppliancesShop.DAL.IRepositories
         public UserDto GetUserByMail(string mail);
 
         public UserDto AddUser(UserDto person);
+
+        public UserDto GetShopByMail(string mail);
     }
 }
