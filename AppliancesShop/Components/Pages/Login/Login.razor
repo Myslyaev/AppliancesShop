@@ -36,7 +36,7 @@
 	public async Task StartLogin()
 	{
 		loginModel.Mail = loginModel.Mail.ToLower();
-		loginModel.Mail = loginModel.Password.ToLower();
+		loginModel.Password = loginModel.Password.ToLower();
 
 		_user = _userClient.GetUserByMail(loginModel.Mail);
 

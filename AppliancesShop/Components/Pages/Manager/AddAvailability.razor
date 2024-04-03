@@ -7,13 +7,13 @@
 	<form>
 		<h2>Добавить товар в магазины:</h2>
 
-		<select class="form-select" aria-label="Выберите магазин" @bind=_shopId>
+		<select class="form-select" aria-label="Выберите магазин" @bind=_availability.ShopId>
 			@foreach (var shop in _shops)
 			{
 				<option value="@shop.Id">@shop.Name</option>
 			}
 		</select>
-		<select class="form-select" aria-label="Выберите товар" @bind=_productId>
+		<select class="form-select" aria-label="Выберите товар" @bind=_availability.ProductId>
 			@foreach (var product in _products)
 			{
 				<option value="@product.Id">@product.Name</option>
@@ -32,10 +32,6 @@
 </div>
 
 @code {
-	private int _productId;
-
-	private int _shopId;
-
 	private AvailabilityInputModel _availability;
 
 	private AvailabilityClient _availabilityClient;
@@ -61,22 +57,13 @@
 
 	protected override void OnInitialized()
 	{
+		_availabilities = _availabilityClient.GetAllAvailability().ToList();
+
 		_products = _productClient.GetAllProducts().ToList();
 
 		_shops = _shopClient.GetAllShops().ToList();
 
-		_availability = new AvailabilityInputModel()
-			{
-				Product= new ProductOutputModel()
-				{
-					Id=_productId
-				},
-
-				Shop = new ShopOutputModel()
-				{
-					Id = _shopId
-				}
-			};
+		_availability = new AvailabilityInputModel();
 	}
 
 	public void AddNewAvailability()

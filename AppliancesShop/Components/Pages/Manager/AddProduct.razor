@@ -7,7 +7,7 @@
 	<form>
 		<h2>Добавить товар:</h2>
 
-		<select class="form-select" aria-label="Выберите категорию товара" @bind=_typeId>
+		<select class="form-select" aria-label="Выберите категорию товара" @bind=_product.TypeId>
 			@foreach (var productType in _productTypes)
 			{
 				<option value="@productType.Id">@productType.Name</option>
@@ -38,8 +38,6 @@
 </div>
 
 @code {
-	private int _typeId;
-
 	private ProductInputModel _product;
 
 	private ProductClient _productClient;
@@ -63,13 +61,7 @@
 
 		_products = _productClient.GetAllProducts().ToList();
 
-		_product = new ProductInputModel()
-			{
-				Type= new ProductTypeOutputModel()
-				{
-					Id=_typeId
-				}
-			};
+		_product = new ProductInputModel();
 	}
 
 	public void AddNewProduct()

@@ -6,7 +6,9 @@ namespace AppliancesShop.BLL.Models.InputModels
     {
         public int? Id { get; set; }
 
-        public ProductTypeOutputModel? Type { get; set; }
+		public int? TypeId { get; set; }
+
+		public ProductTypeOutputModel? Type { get; set; }
 
         public string? Name { get; set; }
 
