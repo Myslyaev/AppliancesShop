@@ -1,4 +1,4 @@
-﻿using AppliancesShop.BLL.Mapping;
+using AppliancesShop.BLL.Mapping;
 using AppliancesShop.BLL.Models.InputModels;
 using AppliancesShop.BLL.Models.OutputModels;
 using AppliancesShop.DAL.Dtos;
@@ -19,9 +19,11 @@ namespace AppliancesShop.BLL.Clients
             var config = new MapperConfiguration(cfg =>
             {
                 cfg.AddProfile(new AvailabilityMappingProfile());
-                cfg.AddProfile(new ProductMappingProfile());
-                cfg.AddProfile(new ShopMappingProfile());
-            });
+				cfg.AddProfile(new ShopMappingProfile());
+				cfg.AddProfile(new ProductMappingProfile());
+				cfg.AddProfile(new ProductTypeMappingProfile());
+
+			});
             _mapper = new Mapper(config);
         }
 

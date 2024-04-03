@@ -3,7 +3,7 @@
 
 <PageTitle>Номер заказа</PageTitle>
 
-<h1>Ваш номер заказа 344К</h1>
+<h1>Ваш номер заказа @orderNumber</h1>
 
 <h3>Мы уведомим Вас когда его можно забрать</h3>
 
@@ -13,3 +13,9 @@
         <button type="submit">Закрыть</button>
     </form>
 </div>
+
+@code {
+
+    private string orderNumber = "344К";
+
+}

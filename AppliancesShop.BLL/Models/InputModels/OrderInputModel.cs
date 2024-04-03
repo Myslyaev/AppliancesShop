@@ -4,6 +4,10 @@ namespace AppliancesShop.BLL.Models.InputModels
 {
 	public class OrderInputModel
 	{
+		public int? ClientId { get; set; }
+
+		public int? ShopId { get; set; }
+
 		public UserOutputModel? Client { get; set; }
 
 		public List<PositionOutputModel>? Positions { get; set; }

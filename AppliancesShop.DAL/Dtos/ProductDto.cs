@@ -1,4 +1,4 @@
-﻿namespace AppliancesShop.DAL.Dtos
+namespace AppliancesShop.DAL.Dtos
 {
 	public class ProductDto
 	{
