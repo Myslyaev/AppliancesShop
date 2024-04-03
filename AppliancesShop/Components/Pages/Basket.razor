@@ -7,31 +7,36 @@
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 @code
 {
-	
+
 	[Parameter]
 	public int Id { get; set; }
-	
-	public ProductOutputModel product  { get; set; }
-	
+
+	public ProductOutputModel product { get; set; }
+
 	private List<ProductOutputModel> _products;
 
-	private ProductClient _product;
-	
+	private ProductClient _productClient;
+
 	private List<ShopOutputModel> _shops;
 
-	private ShopClient _shop;
+	private ShopClient _shopClient;
+
+	private List<AvailabilityOutputModel> _availabilities;
+
+	private AvailabilityClient _availabilityClient;
 
 	public Basket()
 	{
-		_product = new ProductClient();
-		_shop = new ShopClient();
-		
+		_productClient = new ProductClient();
+		_shopClient = new ShopClient();
+		_availabilityClient = new AvailabilityClient();
+
 	}
 
 	protected override void OnInitialized()
 	{
-		_products = _product.GetProductsByProductTypeId(Id);
-		_shops = _shop.GetAllShops();
+		_products = _productClient.GetProductsByProductTypeId(Id);
+		_shops = _shopClient.GetAllShops();
 	}
 }
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -43,23 +48,23 @@
 <h2>Корзина</h2>
 <table class="table">
 	<thead>
-	<tr>
-		<th><h4>Торвар</h4></th>
-		<th><h4>Цена</h4></th>
-		<th><h4>Описание</h4></th>
-		<th><h4>Выбрать шт.</h4></th>
-	</tr>
-	
+		<tr>
+			<th><h4>Товар</h4></th>
+			<th><h4>Цена</h4></th>
+			<th><h4>Описание</h4></th>
+			<th><h4>Выбрать шт.</h4></th>
+		</tr>
+
 	</thead>
-	
-	<tbody>	
-			
+
+	<tbody>
+
 		@foreach (var i in _products)
 		{
 			<tr>
 
 				<ProductInBasket product=i></ProductInBasket>
-				
+
 			</tr>
 		}
 	</tbody>
@@ -91,31 +96,30 @@
 
 				</td>
 				<td>@i.Name</td>
-			@*-- Т.к. в ссылке используется @ а она нужна для внутренних переменных, необходимо использовать двойную собаку
-			     чтобы её заэкранировать, т.к. в ссылке после /maps/ пишем двойную собаку @@, а там где нам нужны данные
-			     из нашей переменной, мы используем одинарную @i.Adress -->*@
+				@*-- Т.к. в ссылке используется @ а она нужна для внутренних переменных, необходимо использовать двойную собаку
+			чтобы её заэкранировать, т.к. в ссылке после /maps/ пишем двойную собаку @@, а там где нам нужны данные
+			из нашей переменной, мы используем одинарную @i.Adress -->*@
 				<td><a href="https://www.google.com/maps/@@59.9400863,30.3028374,11.03z?entry=ttu&q=@i.Adress">@i.Adress</a></td>
-			
-				<td> 12
-					     
-						     @*@foreach (var i in _products)
-						     {
-							     foreach (var a in i.Availability)
-							     {
-								     foreach (var b in i.Availability)
-								     {
-									     @b.Shop.Name;
-								     }
-							     }
-						     }*@
-					     
-					    
-				     </td>
+
+				<td>
+					12
+
+					@foreach (var a in _products)
+					{
+						_availabilities = _availabilityClient.GetAvailabilityByProductId(a.Id);
+						foreach (var s in _availabilities)
+						{
+							<div>@s.Shop.Name - @s.Quantity</div>
+						}
+					}
+
+
+				</td>
 
 			</tr>
 		}
-		
-		</tbody>
+
+	</tbody>
 </table>
 
 

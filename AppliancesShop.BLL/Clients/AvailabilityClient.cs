@@ -18,7 +18,11 @@ namespace AppliancesShop.BLL.Clients
             var config = new MapperConfiguration(cfg =>
             {
                 cfg.AddProfile(new AvailabilityMappingProfile());
-            });
+				cfg.AddProfile(new ShopMappingProfile());
+				cfg.AddProfile(new ProductMappingProfile());
+				cfg.AddProfile(new ProductTypeMappingProfile());
+
+			});
             _mapper = new Mapper(config);
         }
 

@@ -2,7 +2,7 @@
 {
 	public class ProductDto
 	{
-		public int? Id { get; set; }
+		public int Id { get; set; }
 
 		public ProductTypeDto? Type { get; set; }
 

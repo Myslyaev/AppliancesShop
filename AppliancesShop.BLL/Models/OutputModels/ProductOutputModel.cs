@@ -2,7 +2,7 @@
 {
     public class ProductOutputModel
     {
-        public int? Id { get; set; }
+        public int Id { get; set; }
 
         public ProductTypeOutputModel? Type { get; set; }
 

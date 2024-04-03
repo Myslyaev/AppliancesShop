@@ -4,6 +4,10 @@
 	{
 		public int? Id { get; set; }
 
+		public int? ClientId { get; set; }
+
+		public int? ShopId { get; set; }
+
 		public UserDto? Client { get; set; }
 
 		public List<PositionDto>? Positions { get; set; }

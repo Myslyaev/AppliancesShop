@@ -14,6 +14,9 @@ namespace AppliancesShop.BLL.Mapping
 			CreateMap<AvailabilityDto, AvailabilityOutputModel>();
 
 			CreateMap<AvailabilityInputModel, AvailabilityDto>();
+
+			CreateMap<AvailabilityOutputModel, AvailabilityDto>();
+
 		}
 	}
 }
