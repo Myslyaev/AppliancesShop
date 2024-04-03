@@ -63,7 +63,6 @@
 
 		_checkMail = _userClient.GetUserByMail(_user.Mail);
 
-
 		if (_checkMail == null)
 		{
 			_users.Add(_userClient.RegisterClient(_user));

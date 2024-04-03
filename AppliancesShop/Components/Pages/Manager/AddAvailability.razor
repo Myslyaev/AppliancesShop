@@ -1,0 +1,88 @@
+﻿@page "/addavailability"
+@rendermode InteractiveServer
+@attribute [StreamRendering]
+@inject NavigationManager navManager
+
+<div>
+	<form>
+		<h2>Добавить товар в магазины:</h2>
+
+		<select class="form-select" aria-label="Выберите магазин" @bind=_shopId>
+			@foreach (var shop in _shops)
+			{
+				<option value="@shop.Id">@shop.Name</option>
+			}
+		</select>
+		<select class="form-select" aria-label="Выберите товар" @bind=_productId>
+			@foreach (var product in _products)
+			{
+				<option value="@product.Id">@product.Name</option>
+			}
+		</select>
+		<div class="conteiner-for-text">
+			<label class="text">Количество товара:</label>
+			<input @bind=_availability.Quantity class="field" type="text" placeholder="Введите количество товара">
+		</div>
+	</form>
+
+	<div>
+		<p></p>
+		<button @onclick=AddNewAvailability>Добавить</button>
+	</div>
+</div>
+
+@code {
+	private int _productId;
+
+	private int _shopId;
+
+	private AvailabilityInputModel _availability;
+
+	private AvailabilityClient _availabilityClient;
+
+	private ProductClient _productClient;
+
+	private ShopClient _shopClient;
+
+	private List<AvailabilityOutputModel> _availabilities;
+
+	private List<ProductOutputModel> _products;
+
+	private List<ShopOutputModel> _shops;
+
+	public AddAvailability()
+	{
+		_availabilityClient = new AvailabilityClient();
+
+		_productClient = new ProductClient();
+
+		_shopClient = new ShopClient();
+	}
+
+	protected override void OnInitialized()
+	{
+		_products = _productClient.GetAllProducts().ToList();
+
+		_shops = _shopClient.GetAllShops().ToList();
+
+		_availability = new AvailabilityInputModel()
+			{
+				Product= new ProductOutputModel()
+				{
+					Id=_productId
+				},
+
+				Shop = new ShopOutputModel()
+				{
+					Id = _shopId
+				}
+			};
+	}
+
+	public void AddNewAvailability()
+	{
+		_availabilities.Add(_availabilityClient.AddAvailability(_availability));
+
+		navManager.NavigateTo("./addavailabilitycomplete");
+	}
+}
