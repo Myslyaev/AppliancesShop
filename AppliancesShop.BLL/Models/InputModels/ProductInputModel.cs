@@ -4,7 +4,7 @@ namespace AppliancesShop.BLL.Models.InputModels
 {
     public class ProductInputModel
     {
-        public int? Id { get; set; }
+        public int Id { get; set; }
 
 		public int? TypeId { get; set; }
 
