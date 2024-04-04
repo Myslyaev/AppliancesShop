@@ -5,15 +5,25 @@
 @inject NavigationManager navManager
 
 <PageTitle>@_user.Shop.Name</PageTitle>
-<table align="center">
-	<tr>
+
+<h2>Товары в магазине: @_user.Shop.Name</h2>
+<table class="table">
+	<thead>
+		<tr>
+			<th><h4>Товар</h4></th>
+			<th><h4>Цена</h4></th>
+			<th><h4>Наличие</h4></th>
+		</tr>
+	</thead>
+
+	<tbody>
 		@foreach (var i in _availabilities)
 		{
-			<td width="300px">
+			<tr>
 				<AvailabilityCard availability=i></AvailabilityCard>
-			</td>
+			</tr>
 		}
-	</tr>
+	</tbody>
 </table>
 
 @code {
