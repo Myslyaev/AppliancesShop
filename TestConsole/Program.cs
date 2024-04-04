@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 Context context = SingletoneStorage.GetStorage().Context;
 
+//context.Products.Where(a => a.Id == 13).ExecuteDelete();
 
 
 //context.Shops.Add(new ShopDto()

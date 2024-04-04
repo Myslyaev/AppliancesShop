@@ -1,10 +1,13 @@
 ﻿using AppliancesShop.DAL.Enums;
+using System.Security.Policy;
 
 namespace AppliancesShop.BLL.Models.OutputModels
 {
 	public class UserOutputModel
 	{
 		public int? Id { get; set; }
+		
+		public int? ShopId { get; set; }
 
 		public string? Name { get; set; }
 

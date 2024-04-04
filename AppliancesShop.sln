@@ -9,8 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppliancesShop.BLL", "Appli
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppliancesShop.DAL", "AppliancesShop.DAL\AppliancesShop.DAL.csproj", "{C8A52F0D-5938-415D-91DD-F07412185682}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestConsole", "TestConsole\TestConsole.csproj", "{E5ADA3DE-5C5B-4A76-B4A1-9FC4DA45C729}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,10 +27,6 @@ Global
 		{C8A52F0D-5938-415D-91DD-F07412185682}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C8A52F0D-5938-415D-91DD-F07412185682}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C8A52F0D-5938-415D-91DD-F07412185682}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E5ADA3DE-5C5B-4A76-B4A1-9FC4DA45C729}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E5ADA3DE-5C5B-4A76-B4A1-9FC4DA45C729}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E5ADA3DE-5C5B-4A76-B4A1-9FC4DA45C729}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E5ADA3DE-5C5B-4A76-B4A1-9FC4DA45C729}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

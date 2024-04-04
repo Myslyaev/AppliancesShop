@@ -1,0 +1,43 @@
+﻿@using Microsoft.AspNetCore.Components.Authorization
+@using System.Security.Claims
+
+@code {
+	[CascadingParameter]
+	public Task<AuthenticationState> State { get; set; }
+
+	public IEnumerable<Claim> claims = Enumerable.Empty<Claim>();
+	
+	public string Mail { get; set; }
+
+	[Parameter]
+	public EventCallback<String> SendMail { get; set; }
+
+	protected override async Task OnInitializedAsync()
+	{
+		await GetClaimsPrincipalData();
+		
+		if (claims?.Any() == true)
+		{
+			await SendMailTask();
+		}
+
+		await base.OnInitializedAsync();
+	}
+
+	public async Task GetClaimsPrincipalData()
+	{
+		var authState = await State;
+		var user = authState.User;
+
+		if (user.Identity is not null && user.Identity.IsAuthenticated)
+		{
+			claims = user.Claims;
+		}
+	}
+
+	public async Task SendMailTask()
+	{
+		Mail = claims.Where(c => c.Type == ClaimTypes.Email).Select(c => c.Value).Single();
+		await SendMail.InvokeAsync(Mail);
+	}
+}

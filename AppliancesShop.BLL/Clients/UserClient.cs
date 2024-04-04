@@ -27,7 +27,7 @@ namespace AppliancesShop.BLL.Clients
 			_mapper = new Mapper(config);
 		}
 
-		public UserOutputModel RegisterClient(UserRegistrationInputModel client)
+		public UserOutputModel RegisterClient(UserOutputModel client)
 		{
 			UserDto userDtoInput = _mapper.Map<UserDto>(client);
 			userDtoInput.Role = Roles.Client;
@@ -52,10 +52,10 @@ namespace AppliancesShop.BLL.Clients
 			return user;
 		}
 
-		public UserAutenthicationInputModel GetUserByMail(string mail)
+		public UserOutputModel GetUserByMail(string mail)
 		{
 			UserDto userDto = _userRepository.GetUserByMail(mail);
-			UserAutenthicationInputModel user = _mapper.Map<UserAutenthicationInputModel>(userDto);
+			UserOutputModel user = _mapper.Map<UserOutputModel>(userDto);
 
 			return user;
 		}
@@ -68,7 +68,7 @@ namespace AppliancesShop.BLL.Clients
 			return user;
 		}
 
-		public (bool, ClaimsPrincipal) GetClaims(UserAutenthicationInputModel user, string password)
+		public (bool, ClaimsPrincipal) GetClaims(UserOutputModel user, string password)
 		{
 			bool isAuthenticated = false;
 			ClaimsPrincipal pr = null;
@@ -77,7 +77,7 @@ namespace AppliancesShop.BLL.Clients
 			{
 				var claims = new List<Claim>()
 				{
-					new Claim("Mail", user.Mail),
+					new Claim(ClaimTypes.Email, user.Mail),
 					new Claim(ClaimTypes.Role, "Admin")
 				};
 
@@ -91,7 +91,7 @@ namespace AppliancesShop.BLL.Clients
 			{
 				var claims = new List<Claim>()
 				{
-					new Claim("Mail", user.Mail),
+					new Claim(ClaimTypes.Email, user.Mail),
 					new Claim(ClaimTypes.Role, "Manager")
 				};
 
@@ -105,7 +105,7 @@ namespace AppliancesShop.BLL.Clients
 			{
 				var claims = new List<Claim>()
 				{
-					new Claim("Mail", user.Mail),
+					new Claim(ClaimTypes.Email, user.Mail),
 					new Claim(ClaimTypes.Role, "Client")
 				};
 

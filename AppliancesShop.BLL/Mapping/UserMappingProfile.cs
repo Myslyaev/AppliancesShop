@@ -20,6 +20,8 @@ namespace AppliancesShop.BLL.Mapping
 			CreateMap<UserRegistrationInputModel, UserDto>();
 
 			CreateMap<UserDto, UserAutenthicationInputModel>();
+
+			CreateMap<UserOutputModel, UserDto>();
 		}
 	}
 }

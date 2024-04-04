@@ -1,0 +1,43 @@
+﻿@page "/showavailability"
+@using Microsoft.AspNetCore.Components.Authorization
+@using System.Security.Claims
+@rendermode InteractiveServer
+@inject NavigationManager navManager
+
+<GetClaims SendMail="p=>_mail=p"></GetClaims>
+
+<PageTitle>@_user.Shop.Name</PageTitle>
+<table align="center">
+	<tr>
+		@foreach (var i in _availabilities)
+		{
+			<td width="300px">
+				<AvailabilityCard availability=i></AvailabilityCard>
+			</td>
+		}
+	</tr>
+</table>
+
+@code {
+	private string _mail;
+
+	private List<AvailabilityOutputModel> _availabilities;
+
+	private AvailabilityClient _availabilityClient;
+
+	private UserOutputModel _user;
+
+	private UserClient _userClient;
+
+	protected override void OnInitialized()
+	{
+		_availabilityClient = new AvailabilityClient();
+		_userClient = new UserClient();
+	}
+
+	public ShowAvailability()
+	{
+		_user = _userClient.GetUserByMail(_mail);
+		_availabilities = _availabilityClient.GetAvailabilityByShopId((int)_user.ShopId);
+	}
+}

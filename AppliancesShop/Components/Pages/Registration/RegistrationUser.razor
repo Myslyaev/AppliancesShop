@@ -36,9 +36,9 @@
 </div>
 
 @code {
-	private UserRegistrationInputModel _user;
+	private UserOutputModel _user;
 
-	private UserAutenthicationInputModel _checkMail;
+	private UserOutputModel _checkMail;
 
 	private List<UserOutputModel> _users;
 
@@ -51,7 +51,7 @@
 
 	protected override void OnInitialized()
 	{
-		_user = new UserRegistrationInputModel();
+		_user = new UserOutputModel();
 
 		_users = _userClient.GetAllUsers().ToList();
 	}

@@ -5,6 +5,8 @@ namespace AppliancesShop.BLL.Models.InputModels
 {
     public class UserInputModel
 	{
+		public int? ShopId { get; set; }
+
 		public string? Name { get; set; }
 
 		public string? Surname { get; set; }
