@@ -1,4 +1,5 @@
 ﻿using AppliancesShop.BLL.Mapping;
+using AppliancesShop.BLL.Models.InputModels;
 using AppliancesShop.BLL.Models.OutputModels;
 using AppliancesShop.DAL.Dtos;
 using AppliancesShop.DAL.Enums;
@@ -51,9 +52,17 @@ namespace AppliancesShop.BLL.Clients
 			return user;
 		}
 
-		public UserOutputModel GetUserByMail(string mail)
+		public UserAutenthicationInputModel GetUserByMail(string mail)
 		{
 			UserDto userDto = _userRepository.GetUserByMail(mail);
+			UserAutenthicationInputModel user = _mapper.Map<UserAutenthicationInputModel>(userDto);
+
+			return user;
+		}
+
+		public UserOutputModel GetUserWithShopsByMail(string mail)
+		{
+			UserDto userDto = _userRepository.GetUserWithShopsByMail(mail);
 			UserOutputModel user = _mapper.Map<UserOutputModel>(userDto);
 
 			return user;
@@ -67,7 +76,7 @@ namespace AppliancesShop.BLL.Clients
 			return user;
 		}
 
-		public (bool, ClaimsPrincipal) GetClaims(UserOutputModel user, string password)
+		public (bool, ClaimsPrincipal) GetClaims(UserAutenthicationInputModel user, string password)
 		{
 			bool isAuthenticated = false;
 			ClaimsPrincipal pr = null;

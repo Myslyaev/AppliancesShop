@@ -4,8 +4,6 @@
 @rendermode InteractiveServer
 @inject NavigationManager navManager
 
-<GetClaims SendMail="p=>_mail=p"></GetClaims>
-
 <PageTitle>@_user.Shop.Name</PageTitle>
 <table align="center">
 	<tr>
@@ -19,6 +17,11 @@
 </table>
 
 @code {
+	[CascadingParameter]
+	public Task<AuthenticationState> State { get; set; }
+
+	public IEnumerable<Claim> claims = Enumerable.Empty<Claim>();
+
 	private string _mail;
 
 	private List<AvailabilityOutputModel> _availabilities;
@@ -29,15 +32,27 @@
 
 	private UserClient _userClient;
 
-	protected override void OnInitialized()
+	protected override async Task OnInitializedAsync()
+	{
+		var authState = await State;
+		var user = authState.User;
+
+		if (user.Identity is not null && user.Identity.IsAuthenticated)
+		{
+			claims = user.Claims;
+			_mail = claims.Where(c => c.Type == ClaimTypes.Email).Select(c => c.Value).Single();
+		}
+
+		GetAvailability();
+	}
+
+	public void GetAvailability()
 	{
 		_availabilityClient = new AvailabilityClient();
 		_userClient = new UserClient();
-	}
 
-	public ShowAvailability()
-	{
-		_user = _userClient.GetUserByMail(_mail);
+		_user = _userClient.GetUserWithShopsByMail(_mail);
 		_availabilities = _availabilityClient.GetAvailabilityByShopId((int)_user.ShopId);
 	}
 }
+

@@ -17,12 +17,12 @@
 
 @code {
 	[SupplyParameterFromForm]
-	public UserOutputModel loginModel { get; set; } = new UserOutputModel();
+	public UserAutenthicationInputModel loginModel { get; set; } = new UserAutenthicationInputModel();
 
 	[CascadingParameter]
 	public HttpContext httpContext { get; set; }
 
-	private UserOutputModel _user;
+	private UserAutenthicationInputModel _user;
 
 	private UserClient _userClient;
 

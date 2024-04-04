@@ -48,6 +48,14 @@ namespace AppliancesShop.DAL.Repositories
 			}
 		}
 
+		public UserDto GetUserWithShopsByMail(string mail)
+		{
+			Context context = SingletoneStorage.GetStorage().Context;
+			{
+				return context.Users.Where(u => u.Mail == mail).Include(s=>s.Shop).SingleOrDefault();
+			}
+		}
+
 		public UserDto GetShopByMail(string mail)
 		{
 			Context context = SingletoneStorage.GetStorage().Context;
