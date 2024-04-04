@@ -60,7 +60,7 @@ namespace AppliancesShop.DAL.Repositories
 		{
 			Context context = SingletoneStorage.GetStorage().Context;
 			{
-				return context.Users.Where(u => u.Mail == mail).Include(UserDto => UserDto.Shop.Id).Single();
+				return context.Users.Where(u => u.Mail == mail).Include(s => s.Shop.Id).Single();
 			}
 		}
 	}

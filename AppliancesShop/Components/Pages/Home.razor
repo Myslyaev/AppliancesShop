@@ -1,6 +1,8 @@
 ﻿@page "/"
 @using Microsoft.AspNetCore.Components.Authorization
 
+<PageTitle>Магазин бытовой техники</PageTitle>
+
 <AuthorizeView Roles="Admin">
     <Authorized>
         <p>Вы авторизованы как администратор.</p>

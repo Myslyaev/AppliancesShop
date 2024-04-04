@@ -20,7 +20,7 @@ namespace AppliancesShop.DAL.Repositories
         {
             Context context = SingletoneStorage.GetStorage().Context;
             {
-                return context.Availability.ToList();
+                return context.Availability.Include(s=>s.Shop).Include(p=>p.Product).ToList();
             }
         }
 
@@ -28,7 +28,8 @@ namespace AppliancesShop.DAL.Repositories
         {
             Context context = SingletoneStorage.GetStorage().Context;
             {
-                return context.Availability.Where(ProductDto => ProductDto.Product.Id == productId).ToList();
+                return context.Availability.Where(p => p.Product.Id == productId).Include(s => s.Shop)
+                    .Include(p => p.Product).ToList();
             }
         }
 
@@ -36,8 +37,8 @@ namespace AppliancesShop.DAL.Repositories
         {
             Context context = SingletoneStorage.GetStorage().Context;
             {
-                return context.Availability.Where(AvailabilityDto => AvailabilityDto.Shop.Id == shopId).Include(AvailabilityDto => AvailabilityDto.Shop)
-                    .Include(AvailabilityDto => AvailabilityDto.Product).ToList();
+                return context.Availability.Where(s => s.Shop.Id == shopId).Include(s => s.Shop)
+                    .Include(p => p.Product).ToList();
             }
         }
     }

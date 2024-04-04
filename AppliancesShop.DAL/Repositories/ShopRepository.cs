@@ -18,7 +18,7 @@ namespace AppliancesShop.DAL.Repositories
         {
             Context context = SingletoneStorage.GetStorage().Context;
             {
-                var user= context.Users.Where(u => u.Mail == mail).Include(UserDto=>UserDto.Shop).Single();
+                var user= context.Users.Where(u => u.Mail == mail).Include(s=>s.Shop).Single();
 
                 return user.Shop.Id;
             }
