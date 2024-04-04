@@ -1,12 +1,10 @@
 @page "/productsfortype/{Id:int}"
 @attribute [StreamRendering]
-@using AppliancesShop.BLL.Models.OutputModels
 @rendermode InteractiveServer
 
 <PageTitle>ProductsForType</PageTitle>
 
 <h2>Товары категории</h2>
-
 
 @code
 {
@@ -28,26 +26,22 @@
     }
 }
 
-
 <table class="table">
 	<thead>
-	<tr>
-		<th><h4>Товар</h4></th>
-		<th><h4>Цена</h4></th>
-		<th><h4>Подробная информация</h4></th>
-		<th><h4>Добавь в корзину!</h4></th>
-	</tr>
+		<tr>
+			<th><h4>Товар</h4></th>
+			<th><h4>Цена</h4></th>
+			<th><h4>Подробная информация</h4></th>
+			<th><h4>Добавь в корзину!</h4></th>
+		</tr>
 	</thead>
 	<tbody>
-	@foreach (var i in _products)
-	{
-		
-		<tr>
-		<ProductOnPage product=i></ProductOnPage>
-		</tr>
-		
-	}
-	
+		@foreach (var i in _products)
+		{
+			<tr>
+			<ProductOnPage product=i></ProductOnPage>
+			</tr>
+		}
 	</tbody>
 </table>
 

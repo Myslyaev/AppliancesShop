@@ -5,7 +5,6 @@
 
 @code
 {
-
 	[Parameter]
 	public int Id { get; set; }
 
@@ -39,7 +38,6 @@
 		// _orders = _orderClient.GetAllOrders().ToList();
 	}
 }
-
 
 <PageTitle>Корзина</PageTitle>
 
@@ -90,18 +88,13 @@
 							Заберу из
 						</label>
 					</div>
-
 				</td>
 				<td>@i.Name</td>
-				@*-- Т.к. в ссылке используется @ а она нужна для внутренних переменных, необходимо использовать двойную собаку
-			чтобы её заэкранировать, т.к. в ссылке после /maps/ пишем двойную собаку @@, а там где нам нужны данные
-			из нашей переменной, мы используем одинарную @i.Adress -->*@
 				<td><a href="https://www.google.com/maps/@@59.9400863,30.3028374,11.03z?entry=ttu&q=@i.Adress">@i.Adress</a></td>
 			</tr>
 		}
 	</tbody>
 </table>
-
 
 <div class="d-flex flex-row-reverse">
 	<form action="http://localhost:5182/request">

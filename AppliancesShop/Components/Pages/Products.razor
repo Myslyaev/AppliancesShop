@@ -1,14 +1,14 @@
-﻿@page "/productstest"
+﻿@page "/products"
 
 <PageTitle>Каталог товаров</PageTitle>
 <table align="center">
     <tr>
-    @foreach (var i in _productTypes)
-    {
+        @foreach (var i in _productTypes)
+         {
             <td width="300px">
-        <ProductTypeCard productType=i></ProductTypeCard>
+                 <ProductTypeCard productType=i></ProductTypeCard>
             </td>
-    }
+         }
     </tr>
 </table>
 
@@ -18,7 +18,7 @@
 
     private ProductTypeClient _productTypeClient;
 
-    public Productstest()
+    public Products()
     {
         _productTypeClient = new ProductTypeClient();
     }
@@ -26,6 +26,5 @@
     protected override void OnInitialized()
     {
         _productTypes = _productTypeClient.GetAllProductTypes();
-        
     }
 }
