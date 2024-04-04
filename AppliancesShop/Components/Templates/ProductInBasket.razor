@@ -1,7 +1,8 @@
 @using AppliancesShop.BLL.Models.OutputModels
 
         	<td>
-        			<div @bind="@product.Id">@product.Name</div>
+		        <div>@product.Name</div>
+		        @*<div @bind="@product.Id">@product.Name</div>*@
         	</td>
         		<td>
         			<div>  @product.Price руб</div>
@@ -57,7 +58,8 @@
                    					<div class="d-flex">
                    						<button class="btn btn-outline-primary" style="margin-right: 30px;" @onclick="DecrementCount">-</button>
                    
-                   						<div role="status" @bind="currentCount"> @currentCount</div>
+					                    <div role="status"> @currentCount</div>
+					                    @*<div role="status" @bind="currentCount"> @currentCount</div>*@
                    
                    						<button class="btn btn-outline-primary" style="margin-left: 30px;" @onclick="IncrementCount">+</button>
                    					</div>
