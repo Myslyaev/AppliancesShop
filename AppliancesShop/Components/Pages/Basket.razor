@@ -1,6 +1,4 @@
 @page "/basket/{Id:int}"
-@*@page "/productsfortype/{Id:int}"*@
-@using AppliancesShop.BLL.Models.OutputModels
 @attribute [StreamRendering]
 @inject NavigationManager navManager
 @rendermode InteractiveServer
@@ -10,8 +8,6 @@
 
 	[Parameter]
 	public int Id { get; set; }
-
-	public ProductOutputModel product { get; set; }
 
 	public OrderInputModel _order;
 
@@ -29,13 +25,10 @@
 
 	private List<AvailabilityOutputModel> _availabilities;
 
-	private AvailabilityClient _availabilityClient;
-
 	public Basket()
 	{
 		_productClient = new ProductClient();
 		_shopClient = new ShopClient();
-		_availabilityClient = new AvailabilityClient();
 		_orderClient = new OrderClient();
 	}
 
@@ -59,11 +52,9 @@
 			<th><h4>Описание</h4></th>
 			<th><h4>Выбрать шт.</h4></th>
 		</tr>
-
 	</thead>
 
 	<tbody>
-
 		@foreach (var i in _products)
 		{
 			<tr>
@@ -74,12 +65,12 @@
 		}
 	</tbody>
 </table>
-====================================================================================================================================================================
+
 <br />
 
 <h2>Где можно забрать</h2>
 
-<table class="table">
+<table class="table" >
 	<thead>
 		<tr>
 			<th><h4>Заберу из</h4></th>
@@ -120,12 +111,6 @@
 
 
 @code {
-	private string j = "Добавь в корзину)";
-	private int sss = 1;
-	List<int> idsProd = new List<int>();
-	
-	
-	
 	public void AddNewOrder()
 	{
 		_orders.Add(_orderClient.AddOrder(_order));
