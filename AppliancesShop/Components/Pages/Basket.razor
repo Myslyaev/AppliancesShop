@@ -1,17 +1,15 @@
 @page "/basket/{Id:int}"
-@*@page "/productsfortype/{Id:int}"*@
-@using AppliancesShop.BLL.Models.OutputModels
 @attribute [StreamRendering]
+@inject NavigationManager navManager
 @rendermode InteractiveServer
 
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 @code
 {
 
 	[Parameter]
 	public int Id { get; set; }
 
-	public ProductOutputModel product { get; set; }
+	public OrderInputModel _order;
 
 	private List<ProductOutputModel> _products;
 
@@ -19,28 +17,28 @@
 
 	private List<ShopOutputModel> _shops;
 
+	private List<OrderOutputModel> _orders;
+
 	private ShopClient _shopClient;
 
-	private List<AvailabilityOutputModel> _availabilities;
+	private OrderClient _orderClient;
 
-	private AvailabilityClient _availabilityClient;
+	private List<AvailabilityOutputModel> _availabilities;
 
 	public Basket()
 	{
 		_productClient = new ProductClient();
 		_shopClient = new ShopClient();
-		_availabilityClient = new AvailabilityClient();
-
+		_orderClient = new OrderClient();
 	}
 
 	protected override void OnInitialized()
 	{
 		_products = _productClient.GetProductsByProductTypeId(Id);
 		_shops = _shopClient.GetAllShops();
+		// _orders = _orderClient.GetAllOrders().ToList();
 	}
 }
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
 
 
 <PageTitle>Корзина</PageTitle>
@@ -54,11 +52,9 @@
 			<th><h4>Описание</h4></th>
 			<th><h4>Выбрать шт.</h4></th>
 		</tr>
-
 	</thead>
 
 	<tbody>
-
 		@foreach (var i in _products)
 		{
 			<tr>
@@ -69,17 +65,17 @@
 		}
 	</tbody>
 </table>
-====================================================================================================================================================================
+
+<br />
 
 <h2>Где можно забрать</h2>
 
-<table class="table">
+<table class="table" >
 	<thead>
 		<tr>
 			<th><h4>Заберу из</h4></th>
 			<th><h4>Магазин</h4></th>
 			<th><h4>Адрес</h4></th>
-			<th><h4>Кол. шт. в магазине</h4></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -89,6 +85,7 @@
 				<td>
 					<div class="form-check">
 						<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+						@*<input @bind = @i.Id class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>*@
 						<label class="form-check-label" for="exampleRadios1">
 							Заберу из
 						</label>
@@ -100,33 +97,25 @@
 			чтобы её заэкранировать, т.к. в ссылке после /maps/ пишем двойную собаку @@, а там где нам нужны данные
 			из нашей переменной, мы используем одинарную @i.Adress -->*@
 				<td><a href="https://www.google.com/maps/@@59.9400863,30.3028374,11.03z?entry=ttu&q=@i.Adress">@i.Adress</a></td>
-
-				<td>
-					12
-
-					@foreach (var a in _products)
-					{
-						_availabilities = _availabilityClient.GetAvailabilityByProductId(a.Id);
-						foreach (var s in _availabilities)
-						{
-							<div>@s.Shop.Name - @s.Quantity</div>
-						}
-					}
-
-
-				</td>
-
 			</tr>
 		}
-
 	</tbody>
 </table>
 
 
 <div class="d-flex flex-row-reverse">
 	<form action="http://localhost:5182/request">
-		<button type="submit">Заказать</button>
+		<button type="submit" @onclick=AddNewOrder>Заказать</button>
 	</form>
 </div>
 
+
+@code {
+	public void AddNewOrder()
+	{
+		_orders.Add(_orderClient.AddOrder(_order));
+
+		navManager.NavigateTo("./myorder");
+	}
+}
 

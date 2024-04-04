@@ -1,93 +1,89 @@
 @using AppliancesShop.BLL.Models.OutputModels
 
-        	<td>
-        			<div>@product.Name</div>
-        	</td>
-        		<td>
-        			<div>  @product.Price руб</div>
-        		</td>
+       	<td>
+			<div>@product.Name</div>
+		    @*<div @bind="@product.Id">@product.Name</div>*@
+        </td>
+        <td>
+        	<div>  @product.Price руб</div>
+        </td>
         			
-        			<td>
-        				<p><a class='link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover' @onclick="ToggleModal">Посмотреть</a></p>
+        <td>
+        	<p><a class='link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover' @onclick="ToggleModal">Посмотреть</a></p>
                         
-        				<div class="@modalClass " tabindex="-1" style="display: @displayMode;">
-        					<div class="modal-dialog">
+        		<div class="@modalClass " tabindex="-1" style="display: @displayMode;">
+        			<div class="modal-dialog">
+        				<div class="modal-content">
+        					<div class="modal-header">
+								<h5 class="modal-title">@product.Name</h5>
+								<button class="close" @onclick="ToggleModal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+        					</div>
+        						<div class="modal-body">
+        							<p><img src="@product.Img"></p>
+        						</div>
         						<div class="modal-content">
-        							<div class="modal-header">
-								        <h5 class="modal-title">@product.Name</h5>
-								        <button class="close" @onclick="ToggleModal" aria-label="Close" >
-                                        		<span aria-hidden="true">&times;</span>
-                                        </button>
-        							</div>
-        							<div class="modal-body">
-        								<p><img src="@product.Img"></p>
-        							</div>
-        							<div class="modal-content">
-        								<h5 class="modal-title">@product.Price руб.</h5>
-        							</div>
-        							<div class="modal-content">
-        								<h5 class="modal-title">@product.Description</h5>
-        							</div>
-        							<div class="modal-footer">
-        								<button class="btn btn-secondary" @onclick="ToggleModal">Close</button>
-        							</div>
+        							<h5 class="modal-title">@product.Price руб.</h5>
+        						</div>
+        						<div class="modal-content">
+        							<h5 class="modal-title">@product.Description</h5>
+        						</div>
+        						<div class="modal-footer">
+        							<button class="btn btn-secondary" @onclick="ToggleModal">Close</button>
         						</div>
         					</div>
         				</div>
-        			</td>
+        			</div>
+        	</td>
                         
-        			@code {
+@code {
+        bool open = false;
+        string modalClass => open ? "modal fade show" : "modal fade";
+        string displayMode => open ? "block" : "none";
+        
+        private void ToggleModal()
+        {
+        		open = !open;
+        		StateHasChanged();
+        }
                         
-        				bool open = false;
-        				string modalClass => open ? "modal fade show" : "modal fade";
-        				string displayMode => open ? "block" : "none";
-                        
-                        
-        				private void ToggleModal()
-        				{
-        					open = !open;
-        					StateHasChanged();
-        				}
-                        
-        				[Parameter]
-        				public RenderFragment ChildContent { get; set; }
-                        
-        			}
-			       <td>
-                   					<div class="d-flex">
-                   						<button class="btn btn-outline-primary" style="margin-right: 30px;" @onclick="DecrementCount">-</button>
+        [Parameter]
+		public RenderFragment ChildContent { get; set; }
+}
+	<td>
+    	<div class="d-flex">
+			<button class="btn btn-outline-primary" style="margin-right: 30px;" @onclick="DecrementCount">-</button>
+			<div role="status"> @currentCount</div>
+				@*<div role="status" @bind="currentCount"> @currentCount</div>*@
                    
-                   						<div role="status"> @currentCount</div>
+			<button class="btn btn-outline-primary" style="margin-left: 30px;" @onclick="IncrementCount">+</button>
+        </div>
                    
-                   						<button class="btn btn-outline-primary" style="margin-left: 30px;" @onclick="IncrementCount">+</button>
-                   					</div>
+        @code {
+             private int currentCount = 1;
                    
-                   					@code {
-                   						private int currentCount = 1;
+             private void DecrementCount()
+             {
+					if (currentCount > 0)
+					{
+						currentCount--;
+					}
+					else
+					{
+						currentCount = 0;
+					} 
+             }
                    
-                   						private void DecrementCount()
-                   						{
-						                    if (currentCount > 0)
-						                    {
-							                    currentCount--;
-						                    }
-						                    else
-						                    {
-							                    currentCount = 0;
-						                    }
-					                    }
-                   
-                   						private void IncrementCount()
-                   						{
-                   							currentCount++;
-                   						}
-                   					}
-                   
-                   				</td>
+             private void IncrementCount()
+             {
+                   		currentCount++;
+             }
+        }
+	</td>
 			        
 @code {
     [Parameter]
     public ProductOutputModel product { get; set; }
-
 }
 
