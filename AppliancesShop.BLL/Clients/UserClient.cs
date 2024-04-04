@@ -1,5 +1,4 @@
 ﻿using AppliancesShop.BLL.Mapping;
-using AppliancesShop.BLL.Models.InputModels;
 using AppliancesShop.BLL.Models.OutputModels;
 using AppliancesShop.DAL.Dtos;
 using AppliancesShop.DAL.Enums;

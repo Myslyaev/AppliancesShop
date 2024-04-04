@@ -59,6 +59,5 @@ namespace AppliancesShop.BLL.Clients
             OrderDto orderDtos = _orderRepository.GetOrderById(id);
             return _mapper.Map<OrderOutputModel>(orderDtos);
         }
-
     }
 }

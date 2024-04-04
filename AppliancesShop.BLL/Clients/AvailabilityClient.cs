@@ -12,7 +12,6 @@ namespace AppliancesShop.BLL.Clients
     {
         private IAvailabilityRepository _availabilityRepository;
         private Mapper _mapper;
-
         public AvailabilityClient()
         {
             _availabilityRepository = new AvailabilityRepository();
