@@ -1,6 +1,5 @@
 ﻿using AppliancesShop.DAL.Dtos;
 using AppliancesShop.DAL.IRepositories;
-using Microsoft.EntityFrameworkCore;
 
 namespace AppliancesShop.DAL.Repositories
 {
@@ -15,12 +14,5 @@ namespace AppliancesShop.DAL.Repositories
 			}
 			return position;
 		}
-
-		public List<PositionDto> GetPositionsById(int id)
-		{
-			throw new NotImplementedException();
-		}
-
-        
-    }
+	}
 }

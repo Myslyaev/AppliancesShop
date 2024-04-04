@@ -24,5 +24,4 @@ namespace AppliancesShop.DAL.Dtos
 
 		public ShopDto? Shop { get; set; }
 	}
-
 }
